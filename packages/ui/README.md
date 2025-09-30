@@ -1,4 +1,4 @@
-# @repo/ui
+# `@repo/ui`
 
 This is the base UI package that contains all primitive components and styles for the application. It is built on top of [shadcn/ui](https://ui.shadcn.com/), providing a collection of accessible and customizable React components.
 
