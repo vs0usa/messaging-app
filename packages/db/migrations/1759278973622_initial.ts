@@ -28,21 +28,21 @@ export async function up(db: Kysely<any>): Promise<void> {
     .addColumn("id", "uuid", (col) =>
       col.primaryKey().defaultTo(db.fn("uuid_generate_v4")),
     )
-    .addColumn("senderId", "uuid", (col) =>
-      col.notNull().references("users.id").onDelete("cascade"),
-    )
-    .addColumn("recipientId", "uuid", (col) =>
-      col.notNull().references("users.id").onDelete("cascade"),
-    )
-    .addColumn("content", "text", (col) => col.notNull())
-    .addColumn("isEdited", "boolean", (col) => col.notNull().defaultTo(false))
-    .addColumn("editedAt", "timestamptz")
-    .addColumn("readAt", "timestamptz")
     .addColumn("createdAt", "timestamptz", (col) =>
       col.notNull().defaultTo(db.fn("now")),
     )
     .addColumn("updatedAt", "timestamptz", (col) =>
       col.notNull().defaultTo(db.fn("now")),
+    )
+    .addColumn("editedAt", "timestamptz")
+    .addColumn("readAt", "timestamptz")
+    .addColumn("content", "text", (col) => col.notNull())
+    .addColumn("isEdited", "boolean", (col) => col.notNull().defaultTo(false))
+    .addColumn("senderId", "uuid", (col) =>
+      col.notNull().references("users.id").onDelete("cascade"),
+    )
+    .addColumn("recipientId", "uuid", (col) =>
+      col.notNull().references("users.id").onDelete("cascade"),
     )
     .execute()
 
@@ -52,15 +52,15 @@ export async function up(db: Kysely<any>): Promise<void> {
     .addColumn("id", "uuid", (col) =>
       col.primaryKey().defaultTo(db.fn("uuid_generate_v4")),
     )
-    .addColumn("messageId", "uuid", (col) =>
-      col.notNull().references("messages.id").onDelete("cascade"),
+    .addColumn("createdAt", "timestamptz", (col) =>
+      col.notNull().defaultTo(db.fn("now")),
     )
     .addColumn("fileName", "text", (col) => col.notNull())
     .addColumn("fileUrl", "text", (col) => col.notNull())
     .addColumn("fileSize", "integer", (col) => col.notNull())
     .addColumn("mimeType", "text", (col) => col.notNull())
-    .addColumn("createdAt", "timestamptz", (col) =>
-      col.notNull().defaultTo(db.fn("now")),
+    .addColumn("messageId", "uuid", (col) =>
+      col.notNull().references("messages.id").onDelete("cascade"),
     )
     .execute()
 
