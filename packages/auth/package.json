@@ -2,8 +2,9 @@
   "name": "@repo/auth",
   "version": "0.0.0",
   "private": true,
+  "type": "module",
   "exports": {
-    ".": "./src/index.ts"
+    "./server": "./src/config.ts"
   },
   "scripts": {
     "generate-migrations": "pnpm with-env pnpm dlx @better-auth/cli generate --config ./src/config.ts -y",

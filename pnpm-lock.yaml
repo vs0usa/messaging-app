@@ -23,6 +23,12 @@ importers:
       '@hono/node-server':
         specifier: ^1.19.5
         version: 1.19.5(hono@4.9.9)
+      '@repo/auth':
+        specifier: workspace:^
+        version: link:../../packages/auth
+      '@repo/config':
+        specifier: workspace:^
+        version: link:../../packages/config
       hono:
         specifier: ^4.9.9
         version: 4.9.9
@@ -36,6 +42,9 @@ importers:
       '@types/node':
         specifier: ^20.11.17
         version: 20.19.19
+      dotenv-cli:
+        specifier: ^10.0.0
+        version: 10.0.0
       eslint:
         specifier: ^9.34.0
         version: 9.36.0(jiti@2.6.0)

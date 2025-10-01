@@ -18,5 +18,11 @@
       "persistent": true
     }
   },
-  "globalEnv": ["CI", "npm_lifecycle_event", "DATABASE_URL"]
+  "globalEnv": [
+    "CI",
+    "npm_lifecycle_event",
+    "DATABASE_URL",
+    "BETTER_AUTH_SECRET",
+    "BETTER_AUTH_URL"
+  ]
 }
