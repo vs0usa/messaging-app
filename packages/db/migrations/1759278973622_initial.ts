@@ -11,17 +11,15 @@ export async function up(db: Kysely<any>): Promise<void> {
     .addColumn("id", "uuid", (col) =>
       col.primaryKey().defaultTo(db.fn("uuid_generate_v4")),
     )
-    .addColumn("email", "text", (col) => col.notNull().unique())
-    .addColumn("firstName", "text", (col) => col.notNull())
-    .addColumn("lastName", "text", (col) => col.notNull())
-    .addColumn("profilePictureUrl", "text")
-    .addColumn("isActive", "boolean", (col) => col.notNull().defaultTo(true))
     .addColumn("createdAt", "timestamptz", (col) =>
       col.notNull().defaultTo(db.fn("now")),
     )
     .addColumn("updatedAt", "timestamptz", (col) =>
       col.notNull().defaultTo(db.fn("now")),
     )
+    .addColumn("email", "text", (col) => col.notNull().unique())
+    .addColumn("name", "text", (col) => col.notNull())
+    .addColumn("image", "text")
     .execute()
 
   // Messages table
@@ -37,9 +35,6 @@ export async function up(db: Kysely<any>): Promise<void> {
       col.notNull().references("users.id").onDelete("cascade"),
     )
     .addColumn("content", "text", (col) => col.notNull())
-    .addColumn("replyToMessageId", "uuid", (col) =>
-      col.references("messages.id").onDelete("set null"),
-    )
     .addColumn("isEdited", "boolean", (col) => col.notNull().defaultTo(false))
     .addColumn("editedAt", "timestamptz")
     .addColumn("readAt", "timestamptz")
