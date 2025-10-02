@@ -1,7 +1,7 @@
 import { Kysely, PostgresDialect, sql } from "kysely"
 import { Pool } from "pg"
 import type { Database } from "./types"
-import { env } from "./env.js"
+import { env } from "./env"
 
 export const dbConfig = {
   pool: new Pool({ connectionString: env.DATABASE_URL }),
