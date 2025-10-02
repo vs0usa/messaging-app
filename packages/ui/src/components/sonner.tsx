@@ -17,6 +17,7 @@ export const Toaster = ({ ...props }: ToasterProps) => {
           "--normal-border": "var(--border)",
         } as React.CSSProperties
       }
+      toastOptions={{ closeButton: true }}
       {...props}
     />
   )

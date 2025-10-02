@@ -3,6 +3,10 @@ import { Inter } from "next/font/google"
 import { cn } from "@repo/ui/lib/utils"
 import "./globals.css"
 import { Toaster } from "@repo/ui/components/sonner"
+import { getSession } from "@/utils/get-session"
+import { AuthStoreProvider } from "@/stores/auth-store"
+import { LayoutProps } from "@/utils/types"
+import { ThemeProvider } from "next-themes"
 
 const inter = Inter({ subsets: ["latin"] })
 
@@ -23,21 +27,23 @@ export const metadata: Metadata = {
   manifest: "/manifest.json",
 }
 
-export default function RootLayout({
-  children,
-}: Readonly<{
-  children: React.ReactNode
-}>) {
+export default async function RootLayout({ children }: LayoutProps) {
+  const session = await getSession()
+
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <body
         className={cn(
           "bg-background text-foreground antialiased",
           inter.className,
         )}
       >
-        {children}
-        <Toaster />
+        <ThemeProvider attribute="class">
+          <AuthStoreProvider session={session}>
+            {children}
+            <Toaster />
+          </AuthStoreProvider>
+        </ThemeProvider>
       </body>
     </html>
   )

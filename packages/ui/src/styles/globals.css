@@ -1,6 +1,5 @@
 @import "tailwindcss";
 @import "tw-animate-css";
-@source "../../../apps/**/*.{ts,tsx}";
 @source "../components/*.{ts,tsx}";
 
 @custom-variant dark (&:is(.dark *));
@@ -165,4 +164,13 @@
   * {
     @apply border-border outline-ring/50;
   }
+
+  button {
+    @apply not-disabled:cursor-pointer;
+  }
+}
+
+@utility max-size-* {
+  max-height: --spacing(--value(number));
+  max-width: --spacing(--value(number));
 }
