@@ -21,3 +21,6 @@ export const auth = betterAuth({
   session: { modelName: "sessions" },
   verification: { modelName: "verifications" },
 })
+
+export type User = (typeof auth.$Infer.Session)["user"]
+export type Session = typeof auth.$Infer.Session

@@ -17,27 +17,26 @@ import z from "zod"
 import { useHandleAuthError } from "@/hooks/use-handle-auth-error"
 import { useRouter } from "next/navigation"
 import { toast } from "@repo/ui/components/sonner"
+import { Link } from "@/components/ui/link"
 
 const schema = z.object({
-  name: z.string().min(1),
   email: z.email(),
-  password: z.string().min(8),
+  password: z.string(),
 })
 
-export const SignUpForm = () => {
+export const SignInForm = () => {
   const { handleError } = useHandleAuthError()
   const router = useRouter()
   const form = useForm<z.infer<typeof schema>>({
     resolver: zodResolver(schema),
     defaultValues: {
-      name: "",
       email: "",
       password: "",
     },
   })
 
   const handleSubmit = async (values: z.infer<typeof schema>) => {
-    await authClient.signUp.email({
+    await authClient.signIn.email({
       ...values,
       fetchOptions: {
         onError: handleError,
@@ -55,25 +54,6 @@ export const SignUpForm = () => {
         className="w-full max-w-sm space-y-4 md:min-w-96"
         onSubmit={form.handleSubmit(handleSubmit)}
       >
-        <FormField
-          control={form.control}
-          name="name"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Name</FormLabel>
-              <FormControl>
-                <Input
-                  id="name"
-                  type="text"
-                  placeholder="Enter your name"
-                  autoComplete="name"
-                  {...field}
-                />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
         <FormField
           control={form.control}
           name="email"
@@ -98,7 +78,12 @@ export const SignUpForm = () => {
           name="password"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Password</FormLabel>
+              <div className="flex items-center justify-between">
+                <FormLabel>Password</FormLabel>
+                <Link href="#" tabIndex={-1}>
+                  Forgot your password?
+                </Link>
+              </div>
               <FormControl>
                 <Input
                   id="password"
@@ -112,7 +97,7 @@ export const SignUpForm = () => {
             </FormItem>
           )}
         />
-        <FormButton>Create Account</FormButton>
+        <FormButton>Sign In</FormButton>
       </form>
     </Form>
   )
