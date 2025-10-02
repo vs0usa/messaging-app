@@ -1,10 +1,10 @@
 import { Kysely, PostgresDialect, sql } from "kysely"
 import { Pool } from "pg"
 import type { Database } from "./types"
-import { env } from "./env"
+import { dbEnv } from "./env"
 
 export const dbConfig = {
-  pool: new Pool({ connectionString: env.DATABASE_URL }),
+  pool: new Pool({ connectionString: dbEnv.DATABASE_URL }),
 }
 
 // Create the database instance

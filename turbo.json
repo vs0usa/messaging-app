@@ -23,7 +23,6 @@
     "npm_lifecycle_event",
     "DATABASE_URL",
     "BETTER_AUTH_SECRET",
-    "NEXT_PUBLIC_BASE_URL",
-    "NEXT_PUBLIC_API_BASE_URL"
+    "NEXT_PUBLIC_BASE_URL"
   ]
 }

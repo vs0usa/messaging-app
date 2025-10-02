@@ -7,7 +7,7 @@ export default function Page() {
         </h1>
         <p>
           This is a modern messaging application built with Next.js, Tailwind
-          CSS, and Shadcn UI.
+          CSS, shadcn/ui and Hono.
         </p>
       </div>
     </main>
