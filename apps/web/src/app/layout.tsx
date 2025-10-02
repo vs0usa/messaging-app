@@ -7,6 +7,7 @@ import { getSession } from "@/utils/get-session"
 import { AuthStoreProvider } from "@/stores/auth-store"
 import { LayoutProps } from "@/utils/types"
 import { ThemeProvider } from "next-themes"
+import { Providers } from "./_components/providers"
 
 const inter = Inter({ subsets: ["latin"] })
 
@@ -40,8 +41,10 @@ export default async function RootLayout({ children }: LayoutProps) {
       >
         <ThemeProvider attribute="class">
           <AuthStoreProvider session={session}>
-            {children}
-            <Toaster />
+            <Providers>
+              {children}
+              <Toaster />
+            </Providers>
           </AuthStoreProvider>
         </ThemeProvider>
       </body>

@@ -6,13 +6,13 @@ type Props = Omit<ImageProps, "src"> & { src?: string | null }
 
 export const Avatar = ({ src, className, ...props }: Props) => {
   if (src) {
-    return <Image src={src} className={className} {...props} />
+    return <Image src={src} className={className} radius="full" {...props} />
   }
 
   return (
     <div
       className={cn(
-        "relative rounded-full bg-accent p-2 text-accent-foreground",
+        "relative rounded-full bg-accent p-2 text-accent-foreground border",
         className,
       )}
       style={{
