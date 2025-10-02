@@ -18,6 +18,7 @@ export const authEnv = createEnv({
   server: {
     DATABASE_URL: z.url(),
     BETTER_AUTH_SECRET: z.string(),
+    SEED_DEFAULT_PASSWORD: z.string(),
   },
 
   /**

@@ -4,4 +4,7 @@ import { dbConfig } from "./src"
 export default defineConfig({
   dialect: "pg",
   dialectConfig: dbConfig,
+  seeds: {
+    seedFolder: "../auth/src/seeds/",
+  },
 })

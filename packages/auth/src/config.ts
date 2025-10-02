@@ -13,7 +13,7 @@ export const auth = betterAuth({
     minPasswordLength: config.auth.password.minLength,
     maxPasswordLength: config.auth.password.maxLength,
   },
-  advanced: { generateId: false },
+  advanced: { database: { generateId: false } },
 
   // Use plural names for the tables
   user: { modelName: "users" },
