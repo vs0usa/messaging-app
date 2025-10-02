@@ -8,6 +8,7 @@ type State = {
   user: User | null
   session: Session["session"] | null
 
+  signIn: (user: User) => void
   signOut: () => void
 }
 
@@ -17,6 +18,9 @@ const createAuthStore = (session: Session | null) =>
   createStore<State>((set) => ({
     user: session?.user ?? null,
     session: session?.session ?? null,
+    signIn: (user) => {
+      set({ user, session: null })
+    },
     signOut: () => {
       set({ user: null, session: null })
     },

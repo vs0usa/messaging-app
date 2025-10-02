@@ -18,14 +18,16 @@ import { useHandleAuthError } from "@/hooks/use-handle-auth-error"
 import { useRouter } from "next/navigation"
 import { toast } from "@repo/ui/components/sonner"
 import { Link } from "@/components/ui/link"
+import { useAuth } from "@/stores/auth-store"
 
 const schema = z.object({
   email: z.email(),
-  password: z.string(),
+  password: z.string().min(1),
 })
 
 export const SignInForm = () => {
   const { handleError } = useHandleAuthError()
+  const { signIn } = useAuth()
   const router = useRouter()
   const form = useForm<z.infer<typeof schema>>({
     resolver: zodResolver(schema),
@@ -40,7 +42,8 @@ export const SignInForm = () => {
       ...values,
       fetchOptions: {
         onError: handleError,
-        onSuccess: () => {
+        onSuccess: (data) => {
+          signIn(data.data.user)
           router.push("/")
           toast.success("Welcome to the app!")
         },
