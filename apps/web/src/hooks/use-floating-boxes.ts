@@ -8,7 +8,7 @@ const EXPANDED_CHATBOX_WIDTH = 384 // Expanded chatbox width
 const GAP = 16 // Gap between chatboxes
 
 export const useFloatingBoxes = () => {
-  const { chats, currentChat } = useMessagesStore()
+  const { openChats, currentChat } = useMessagesStore()
   const [availableWidth, setAvailableWidth] = useState(0)
   const allowedItems = useMemo(() => {
     if (availableWidth < 224) return 0
@@ -16,8 +16,8 @@ export const useFloatingBoxes = () => {
     return Math.floor(remainingWidth / 224) + 1 // Add 1 to include first chat
   }, [availableWidth])
   const filteredChats = useMemo(
-    () => chats.slice(Math.max(chats.length - allowedItems, 0)),
-    [chats, allowedItems],
+    () => openChats.slice(Math.max(openChats.length - allowedItems, 0)),
+    [openChats, allowedItems],
   )
 
   const getAvailableWidth = () => {
