@@ -1,6 +1,6 @@
 import { Hono } from "hono"
-import { authMiddleware } from "../middlewares/auth-middleware"
 import { sql } from "kysely"
+import { authMiddleware } from "../middlewares/auth-middleware"
 
 export const app = new Hono().get(
   "/",

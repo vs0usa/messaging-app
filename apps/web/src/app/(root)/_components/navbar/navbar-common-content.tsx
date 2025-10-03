@@ -1,3 +1,5 @@
+import { MonitorIcon, MoonIcon, SunIcon } from "lucide-react"
+import { useTheme } from "next-themes"
 import {
   DropdownMenuPortal,
   DropdownMenuRadioGroup,
@@ -6,8 +8,6 @@ import {
   DropdownMenuSubContent,
   DropdownMenuSubTrigger,
 } from "@repo/ui/components/dropdown-menu"
-import { useTheme } from "next-themes"
-import { SunIcon, MoonIcon, MonitorIcon } from "lucide-react"
 
 export const NavbarCommonContent = () => {
   const { systemTheme, theme, setTheme } = useTheme()

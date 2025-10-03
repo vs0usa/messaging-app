@@ -1,9 +1,12 @@
 "use client"
-import NextImage, { type ImageProps as NextImageProps } from "next/image"
+
+import type { ImageProps as NextImageProps } from "next/image"
+import type { VariantProps } from "tailwind-variants"
 import { useState } from "react"
-import { tv, type VariantProps } from "tailwind-variants"
-import { Skeleton } from "./skeleton"
+import NextImage from "next/image"
+import { tv } from "tailwind-variants"
 import { cn } from "../lib/utils"
+import { Skeleton } from "./skeleton"
 
 const image = tv({
   base: "relative min-w-fit overflow-hidden *:transition-[scale,width,height,min-width,min-height,max-width,max-height] *:duration-300",

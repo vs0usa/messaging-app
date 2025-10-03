@@ -1,6 +1,6 @@
+import { betterAuth } from "better-auth"
 import { config } from "@repo/config"
 import { dbConfig } from "@repo/db"
-import { betterAuth } from "better-auth"
 import { authEnv } from "./env"
 
 export const auth = betterAuth({

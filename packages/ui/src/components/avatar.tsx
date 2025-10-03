@@ -1,6 +1,7 @@
 import { UserIcon } from "lucide-react"
-import { Image, type ImageProps } from "./image"
+import type { ImageProps } from "./image"
 import { cn } from "../lib/utils"
+import { Image } from "./image"
 
 type Props = Omit<ImageProps, "src"> & { src?: string | null }
 

@@ -1,5 +1,5 @@
-import { auth, User } from "@repo/auth/server"
 import { createMiddleware } from "hono/factory"
+import { auth, User } from "@repo/auth/server"
 
 type Env = {
   Variables: {

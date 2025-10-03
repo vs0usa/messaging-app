@@ -1,10 +1,10 @@
 "use client"
 
 import { motion } from "framer-motion"
-import { useUser } from "@/stores/auth-store"
-import { Avatar } from "@repo/ui/components/avatar"
 import { ChevronUpIcon } from "lucide-react"
+import { Avatar } from "@repo/ui/components/avatar"
 import { MessagesBoxList } from "@/components/messages/messages-box-list"
+import { useUser } from "@/stores/auth-store"
 import { useMessagesStore } from "@/stores/messages-store"
 
 export const MessagesBox = () => {

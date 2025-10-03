@@ -1,9 +1,9 @@
 "use client"
 
-import { Session, User } from "@repo/auth/server"
-import { syncTabs } from "zustand-sync-tabs"
 import { createContext, ReactNode, useContext, useRef } from "react"
 import { createStore, useStore } from "zustand"
+import { syncTabs } from "zustand-sync-tabs"
+import { Session, User } from "@repo/auth/server"
 
 type State = {
   user: User | null

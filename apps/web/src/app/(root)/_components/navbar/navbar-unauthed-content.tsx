@@ -1,3 +1,6 @@
+import Link from "next/link"
+import { ArrowRightIcon } from "lucide-react"
+import { Avatar } from "@repo/ui/components/avatar"
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -5,10 +8,7 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@repo/ui/components/dropdown-menu"
-import Link from "next/link"
 import { NavbarCommonContent } from "./navbar-common-content"
-import { Avatar } from "@repo/ui/components/avatar"
-import { ArrowRightIcon } from "lucide-react"
 
 export const NavbarUnauthedContent = () => {
   return (

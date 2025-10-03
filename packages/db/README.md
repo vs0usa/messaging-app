@@ -5,7 +5,7 @@ Database package for the messaging app using Kysely as the query builder.
 ## Usage
 
 ```typescript
-import { db, checkDatabaseConnection } from "@repo/db"
+import { checkDatabaseConnection, db } from "@repo/db"
 
 // Check database connection
 const isConnected = await checkDatabaseConnection()

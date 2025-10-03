@@ -1,8 +1,8 @@
-import { useMessagesStore } from "@/stores/messages-store"
-import { Avatar } from "@repo/ui/components/avatar"
-import { XIcon } from "lucide-react"
 import { motion } from "framer-motion"
+import { XIcon } from "lucide-react"
+import { Avatar } from "@repo/ui/components/avatar"
 import { useFloatingBoxes } from "@/hooks/use-floating-boxes"
+import { useMessagesStore } from "@/stores/messages-store"
 
 export const OpenedChats = () => {
   const { contacts, currentChat, setCurrentChat, closeChat } =

@@ -1,5 +1,5 @@
-import { useMessagesStore } from "@/stores/messages-store"
 import { useCallback, useEffect, useMemo, useState } from "react"
+import { useMessagesStore } from "@/stores/messages-store"
 
 const PERMANENT_BOX_WIDTH = 256 // Messages box width
 const RIGHT_PADDING = 32 // Right padding

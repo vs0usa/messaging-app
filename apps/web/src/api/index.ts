@@ -1,10 +1,10 @@
-import { auth } from "@repo/auth/server"
 import { Hono } from "hono"
 import { cors } from "hono/cors"
+import { auth } from "@repo/auth/server"
+import { db } from "@repo/db"
 import { app as contactsApp } from "./routes/contacts"
 import { app as messagesApp } from "./routes/messages"
 import { fail, send } from "./utils/context"
-import { db } from "@repo/db"
 
 export const app = new Hono().basePath("/api")
 

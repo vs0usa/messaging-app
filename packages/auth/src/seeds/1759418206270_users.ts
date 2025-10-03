@@ -1,7 +1,7 @@
-import { Database } from "@repo/db"
 import type { Kysely } from "kysely"
-import { auth } from "../config"
 import { faker } from "@faker-js/faker"
+import { Database } from "@repo/db"
+import { auth } from "../config"
 import { authEnv } from "../env"
 
 export async function seed(db: Kysely<Database>) {

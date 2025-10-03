@@ -1,6 +1,6 @@
-import { User } from "@repo/auth/server"
-import { syncTabs } from "zustand-sync-tabs"
 import { create } from "zustand"
+import { syncTabs } from "zustand-sync-tabs"
+import { User } from "@repo/auth/server"
 
 type State = {
   contacts: Pick<User, "id" | "name" | "image">[]

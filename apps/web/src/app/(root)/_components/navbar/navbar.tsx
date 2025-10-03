@@ -1,10 +1,10 @@
 "use client"
 
-import { NavbarAuthedContent } from "./navbar-authed-content"
-import { NavbarUnauthedContent } from "./navbar-unauthed-content"
-import { useUser } from "@/stores/auth-store"
 import Image from "next/image"
 import Link from "next/link"
+import { useUser } from "@/stores/auth-store"
+import { NavbarAuthedContent } from "./navbar-authed-content"
+import { NavbarUnauthedContent } from "./navbar-unauthed-content"
 
 export const Navbar = () => {
   const user = useUser()

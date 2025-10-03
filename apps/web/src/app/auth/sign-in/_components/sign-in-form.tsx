@@ -1,6 +1,10 @@
 "use client"
 
+import { useRouter } from "next/navigation"
 import { zodResolver } from "@hookform/resolvers/zod"
+import { useForm } from "react-hook-form"
+import z from "zod"
+import { authClient } from "@repo/auth/client"
 import {
   Form,
   FormButton,
@@ -11,13 +15,9 @@ import {
   FormMessage,
 } from "@repo/ui/components/form"
 import { Input } from "@repo/ui/components/input"
-import { authClient } from "@repo/auth/client"
-import { useForm } from "react-hook-form"
-import z from "zod"
-import { useHandleAuthError } from "@/hooks/use-handle-auth-error"
-import { useRouter } from "next/navigation"
 import { toast } from "@repo/ui/components/sonner"
 import { Link } from "@/components/ui/link"
+import { useHandleAuthError } from "@/hooks/use-handle-auth-error"
 import { useAuth } from "@/stores/auth-store"
 
 const schema = z.object({

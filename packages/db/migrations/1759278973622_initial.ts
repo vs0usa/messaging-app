@@ -1,4 +1,5 @@
-import { sql, type Kysely } from "kysely"
+import type { Kysely } from "kysely"
+import { sql } from "kysely"
 
 export async function up(db: Kysely<any>): Promise<void> {
   // Enable UUID extension

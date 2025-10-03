@@ -1,7 +1,7 @@
-import { useHandleAuthError } from "@/hooks/use-handle-auth-error"
-import { useAuth } from "@/stores/auth-store"
+import Link from "next/link"
+import { MailsIcon, SettingsIcon } from "lucide-react"
 import { authClient } from "@repo/auth/client"
-import { toast } from "@repo/ui/components/sonner"
+import { Avatar } from "@repo/ui/components/avatar"
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -9,10 +9,10 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@repo/ui/components/dropdown-menu"
-import Link from "next/link"
+import { toast } from "@repo/ui/components/sonner"
+import { useHandleAuthError } from "@/hooks/use-handle-auth-error"
+import { useAuth } from "@/stores/auth-store"
 import { NavbarCommonContent } from "./navbar-common-content"
-import { Avatar } from "@repo/ui/components/avatar"
-import { MailsIcon, SettingsIcon } from "lucide-react"
 
 export const NavbarAuthedContent = () => {
   const { user, signOut } = useAuth()

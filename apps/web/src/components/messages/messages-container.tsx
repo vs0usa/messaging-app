@@ -1,8 +1,8 @@
 "use client"
 
+import { OpenedChats } from "@/components/messages/opened-chats"
 import { useAuth } from "@/stores/auth-store"
 import { MessagesBox } from "./messages-box"
-import { OpenedChats } from "@/components/messages/opened-chats"
 
 export const MessagesContainer = () => {
   const { user } = useAuth()

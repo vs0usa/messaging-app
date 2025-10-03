@@ -1,8 +1,8 @@
 "use client"
 
-import { toast } from "@repo/ui/components/sonner"
-import { authMessages } from "@repo/auth/utils"
 import { ErrorContext } from "better-auth/react"
+import { authMessages } from "@repo/auth/utils"
+import { toast } from "@repo/ui/components/sonner"
 
 export const useHandleAuthError = () => {
   const handleError = ({ error }: ErrorContext) => {
