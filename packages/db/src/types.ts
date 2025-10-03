@@ -1,14 +1,14 @@
 import type { Generated, Insertable, Selectable, Updateable } from "kysely"
 
 // Database schema types
-export interface Database {
+export type Database = {
   users: UserTable
   messages: MessageTable
   attachments: AttachmentTable
 }
 
 // Users table - stores user profile information
-export interface UserTable {
+export type UserTable = {
   id: Generated<string>
   createdAt: Generated<Date>
   updatedAt: Generated<Date>
@@ -19,7 +19,7 @@ export interface UserTable {
 }
 
 // Accounts table - stores account information
-export interface AccountTable {
+export type AccountTable = {
   id: Generated<string>
   createdAt: Generated<Date>
   updatedAt: Generated<Date>
@@ -36,7 +36,7 @@ export interface AccountTable {
 }
 
 // Sessions table - stores session information
-export interface SessionTable {
+export type SessionTable = {
   id: Generated<string>
   createdAt: Generated<Date>
   updatedAt: Generated<Date>
@@ -48,7 +48,7 @@ export interface SessionTable {
 }
 
 // Verifications table - stores verification information
-export interface VerificationTable {
+export type VerificationTable = {
   id: Generated<string>
   createdAt: Generated<Date>
   updatedAt: Generated<Date>
@@ -58,7 +58,7 @@ export interface VerificationTable {
 }
 
 // Messages table - stores individual messages between two users
-export interface MessageTable {
+export type MessageTable = {
   id: Generated<string>
   createdAt: Generated<Date>
   updatedAt: Generated<Date>
@@ -71,7 +71,7 @@ export interface MessageTable {
 }
 
 // Attachments table - stores file attachments for messages
-export interface AttachmentTable {
+export type AttachmentTable = {
   id: Generated<string>
   createdAt: Generated<Date>
   fileName: string

@@ -8,7 +8,7 @@
   },
   "scripts": {
     "dev": "pnpm with-env tsx watch src/index.ts",
-    "build": "pnpm with-env tsc",
+    "build": "pnpm with-env tsc --outDir dist",
     "start": "pnpm with-env node dist/index.js",
     "with-env": "dotenv -e ../../.env --",
     "format": "prettier --check . --ignore-path ../../.gitignore",

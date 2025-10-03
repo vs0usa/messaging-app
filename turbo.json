@@ -19,7 +19,7 @@
       "outputLogs": "new-only"
     },
     "lint": {
-      "dependsOn": ["^topo", "^build"],
+      "dependsOn": ["^topo"],
       "outputs": [".cache/.eslintcache"]
     },
     "check-types": {

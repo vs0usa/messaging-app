@@ -2,7 +2,7 @@ import { create } from "zustand"
 import { syncTabs } from "zustand-sync-tabs"
 import type { User } from "@repo/auth/server"
 
-interface State {
+type State = {
   contacts: Pick<User, "id" | "name" | "image">[]
   chats: string[]
   boxExpanded: boolean

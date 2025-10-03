@@ -17,10 +17,10 @@ import { Label } from "./label"
 
 export const Form = FormProvider
 
-interface FormFieldContextValue<
+type FormFieldContextValue<
   TFieldValues extends FieldValues = FieldValues,
   TName extends FieldPath<TFieldValues> = FieldPath<TFieldValues>,
-> {
+> = {
   name: TName
 }
 
@@ -65,7 +65,7 @@ export const useFormField = () => {
   }
 }
 
-interface FormItemContextValue {
+type FormItemContextValue = {
   id: string
 }
 

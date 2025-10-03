@@ -3,7 +3,7 @@
 import { useRouter } from "next/navigation"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
-import z from "zod"
+import { z } from "zod/v4"
 import { authClient } from "@repo/auth/client"
 import {
   Form,

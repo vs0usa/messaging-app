@@ -6,7 +6,7 @@ import { createStore, useStore } from "zustand"
 import { syncTabs } from "zustand-sync-tabs"
 import type { Session, User } from "@repo/auth/server"
 
-interface State {
+type State = {
   user: User | null
   session: Session["session"] | null
 

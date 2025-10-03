@@ -1,7 +1,6 @@
 import type { Context } from "hono"
-import { UpgradeWebSocket } from "hono/ws"
+import type { UpgradeWebSocket } from "hono/ws"
 import type { Database, Kysely } from "@repo/db"
-import { User } from "@repo/auth/server"
 
 type Meta = Record<string, string | number>
 
@@ -24,6 +23,7 @@ export const fail = (ctx: Context) => (errorName: string, message?: string) =>
   })
 
 declare module "hono" {
+  // eslint-disable-next-line @typescript-eslint/consistent-type-definitions
   interface ContextVariableMap {
     send: ReturnType<typeof send>
     fail: ReturnType<typeof fail>
