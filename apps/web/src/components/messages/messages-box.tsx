@@ -9,7 +9,7 @@ import { useMessagesStore } from "@/stores/messages-store"
 
 export const MessagesBox = () => {
   const user = useUser()
-  const { boxExpanded, toggleBox } = useMessagesStore()
+  const { contactsExpanded, toggleContacts } = useMessagesStore()
 
   if (!user) return null
 
@@ -17,12 +17,12 @@ export const MessagesBox = () => {
     <motion.div
       className="flex w-64 flex-col"
       initial={{ height: "48px" }}
-      animate={{ height: boxExpanded ? "60vh" : "48px" }}
+      animate={{ height: contactsExpanded ? "60vh" : "48px" }}
       transition={{ duration: 0.3, ease: "easeInOut" }}
     >
       <div
         className="relative flex cursor-pointer select-none items-center"
-        onClick={toggleBox}
+        onClick={toggleContacts}
       >
         <div className="bg-popover hover:bg-accent flex h-12 w-full items-center gap-2 rounded-t-md border border-b-0 px-2 transition-colors">
           <Avatar
@@ -37,10 +37,10 @@ export const MessagesBox = () => {
         <div className="absolute right-2 flex">
           <button
             className="hover:bg-accent rounded-full p-2 transition-[background-color,rotate] data-[expanded=true]:rotate-180"
-            data-expanded={boxExpanded}
+            data-expanded={contactsExpanded}
             onClick={(e) => {
               e.stopPropagation()
-              toggleBox()
+              toggleContacts()
             }}
           >
             <ChevronUpIcon className="text-muted-foreground size-4" />

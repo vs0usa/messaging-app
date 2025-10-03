@@ -7,7 +7,7 @@ import { apiClient, call } from "@/utils/call"
 import { formatMessageDate } from "@/utils/date-format"
 
 export const MessagesBoxList = () => {
-  const { setContacts, openChat, setCurrentChat } = useMessagesStore()
+  const { setContacts, openChat, setRecipientId } = useMessagesStore()
   const { data: users, isPending } = useQuery({
     queryKey: ["get-contacts"],
     queryFn: call(apiClient.contacts.$get),
@@ -38,7 +38,7 @@ export const MessagesBoxList = () => {
           className="hover:bg-accent flex cursor-pointer items-center gap-2 p-2 text-start transition-colors"
           onClick={() => {
             openChat(u.id)
-            setCurrentChat(u.id)
+            setRecipientId(u.id)
           }}
         >
           <Avatar

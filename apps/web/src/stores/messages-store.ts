@@ -5,13 +5,13 @@ import type { User } from "@repo/auth/server"
 type State = {
   contacts: Pick<User, "id" | "name" | "image">[]
   openChats: string[] // User IDs
-  boxExpanded: boolean
-  currentChat: string | null
+  contactsExpanded: boolean
+  recipientId: string | null
 
   setWs: (ws: WebSocket | null) => void
   setContacts: (contacts: Pick<User, "id" | "name" | "image">[]) => void
-  setCurrentChat: (userId: string | null) => void
-  toggleBox: () => void
+  setRecipientId: (userId: string | null) => void
+  toggleContacts: () => void
   openChat: (userId: string) => void
   closeChat: (userId: string) => void
 }
@@ -21,13 +21,14 @@ export const useMessagesStore = create<State>(
     (set) => ({
       contacts: [],
       openChats: [],
-      boxExpanded: false,
-      currentChat: null,
+      contactsExpanded: false,
+      recipientId: null,
       setWs: (ws: WebSocket | null) => set(() => ({ ws })),
       setContacts: (contacts: State["contacts"]) => set(() => ({ contacts })),
-      setCurrentChat: (userId: string | null) =>
-        set(() => ({ currentChat: userId })),
-      toggleBox: () => set((state) => ({ boxExpanded: !state.boxExpanded })),
+      setRecipientId: (userId: string | null) =>
+        set(() => ({ recipientId: userId })),
+      toggleContacts: () =>
+        set((state) => ({ contactsExpanded: !state.contactsExpanded })),
       openChat: (userId: string) =>
         set((state) => ({
           openChats: [...state.openChats.filter((id) => id !== userId), userId],

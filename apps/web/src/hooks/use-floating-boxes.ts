@@ -8,7 +8,7 @@ const EXPANDED_CHATBOX_WIDTH = 384 // Expanded chatbox width
 const GAP = 16 // Gap between chatboxes
 
 export const useFloatingBoxes = () => {
-  const { openChats, currentChat } = useMessagesStore()
+  const { openChats, recipientId } = useMessagesStore()
   const [availableWidth, setAvailableWidth] = useState(0)
   const allowedItems = useMemo(() => {
     if (availableWidth < 224) return 0
@@ -34,7 +34,7 @@ export const useFloatingBoxes = () => {
       // Calculate positions from right to left
       for (let j = filteredChats.length - 1; j >= i; j--) {
         const chatId = filteredChats[j]
-        const isExpanded = currentChat === chatId
+        const isExpanded = recipientId === chatId
 
         if (j === i) {
           // This is the current chatbox we're positioning
@@ -48,7 +48,7 @@ export const useFloatingBoxes = () => {
 
       return `${rightOffset}px`
     },
-    [filteredChats, currentChat],
+    [filteredChats, recipientId],
   )
 
   useEffect(() => {
