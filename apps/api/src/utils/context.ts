@@ -1,5 +1,7 @@
 import type { Context } from "hono"
+import { UpgradeWebSocket } from "hono/ws"
 import type { Database, Kysely } from "@repo/db"
+import { User } from "@repo/auth/server"
 
 type Meta = Record<string, string | number>
 
@@ -25,6 +27,7 @@ declare module "hono" {
   interface ContextVariableMap {
     send: ReturnType<typeof send>
     fail: ReturnType<typeof fail>
+    upgradeWebSocket: UpgradeWebSocket
     db: Kysely<Database>
   }
 }

@@ -4,12 +4,17 @@
   "private": true,
   "type": "module",
   "exports": {
-    ".": "./src/index.ts"
+    ".": "./src/index.ts",
+    "./env": "./src/env.ts"
   },
   "scripts": {
     "format": "prettier --check . --ignore-path ../../.gitignore",
     "lint": "eslint .",
     "check-types": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@t3-oss/env-nextjs": "^0.13.8",
+    "zod": "^4.1.11"
   },
   "devDependencies": {
     "@repo/eslint-config": "workspace:*",

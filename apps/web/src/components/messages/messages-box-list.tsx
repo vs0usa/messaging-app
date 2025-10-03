@@ -2,9 +2,8 @@ import { useEffect } from "react"
 import { useQuery } from "@tanstack/react-query"
 import { Avatar } from "@repo/ui/components/avatar"
 import { Skeleton } from "@repo/ui/components/skeleton"
-import { apiClient } from "@/api/client"
 import { useMessagesStore } from "@/stores/messages-store"
-import { call } from "@/utils/call"
+import { apiClient, call } from "@/utils/call"
 import { formatMessageDate } from "@/utils/date-format"
 
 export const MessagesBoxList = () => {

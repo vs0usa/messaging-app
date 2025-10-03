@@ -1,0 +1,39 @@
+{
+  "name": "@repo/api",
+  "version": "0.1.0",
+  "type": "module",
+  "private": true,
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "scripts": {
+    "dev": "pnpm with-env tsx watch src/index.ts",
+    "build": "pnpm with-env tsc",
+    "start": "pnpm with-env node dist/index.js",
+    "with-env": "dotenv -e ../../.env --",
+    "format": "prettier --check . --ignore-path ../../.gitignore",
+    "lint": "eslint .",
+    "check-types": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@hono/node-server": "^1.19.5",
+    "@hono/node-ws": "^1.2.0",
+    "@repo/auth": "workspace:^",
+    "@repo/config": "workspace:^",
+    "@repo/db": "workspace:^",
+    "hono": "4.9.7"
+  },
+  "devDependencies": {
+    "@repo/eslint-config": "workspace:*",
+    "@repo/prettier-config": "workspace:^",
+    "@repo/typescript-config": "workspace:*",
+    "@types/node": "^22.15.3",
+    "dotenv-cli": "^10.0.0",
+    "eslint": "^9.36.0",
+    "prettier": "^3.6.2",
+    "tsx": "^4.7.1",
+    "typescript": "^5.9.2",
+    "typescript-eslint": "^8.42.0"
+  },
+  "prettier": "@repo/prettier-config"
+}

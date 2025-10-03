@@ -1,6 +1,6 @@
 "use client"
 
-import { OpenedChats } from "@/components/messages/opened-chats"
+import { ChatBoxesContainer } from "@/components/chat-boxes/chat-boxes-container"
 import { useAuth } from "@/stores/auth-store"
 import { MessagesBox } from "./messages-box"
 
@@ -13,7 +13,7 @@ export const MessagesContainer = () => {
   return (
     <div className="fixed bottom-0 z-10 hidden w-screen flex-row-reverse gap-4 px-4 md:flex">
       <MessagesBox />
-      <OpenedChats />
+      <ChatBoxesContainer />
     </div>
   )
 }

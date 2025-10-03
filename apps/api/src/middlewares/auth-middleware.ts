@@ -2,7 +2,7 @@ import { createMiddleware } from "hono/factory"
 import type { User } from "@repo/auth/server"
 import { auth } from "@repo/auth/server"
 
-interface Env {
+type Env = {
   Variables: {
     user: User
   }

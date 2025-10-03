@@ -1,11 +1,10 @@
 import { betterAuth } from "better-auth"
 import { config } from "@repo/config"
 import { dbConfig } from "@repo/db"
-import { authEnv } from "./env"
 
 export const auth = betterAuth({
   database: dbConfig.pool,
-  trustedOrigins: [authEnv.NEXT_PUBLIC_BASE_URL],
+  trustedOrigins: [config.web.baseUrl],
   emailAndPassword: {
     enabled: true,
     //Email verification is not implemented yet, so we can auto sign in the user

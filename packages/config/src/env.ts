@@ -1,7 +1,7 @@
 import { createEnv } from "@t3-oss/env-nextjs"
 import { z } from "zod"
 
-export const authEnv = createEnv({
+export const configEnv = createEnv({
   /**
    * Specify your client-side environment variables schema here.
    * For them to be exposed to the client, prefix them with `NEXT_PUBLIC_`.
@@ -16,9 +16,7 @@ export const authEnv = createEnv({
    * This way you can ensure the app isn't built with invalid env vars.
    */
   server: {
-    DATABASE_URL: z.url(),
-    BETTER_AUTH_SECRET: z.string(),
-    SEED_DEFAULT_PASSWORD: z.string(),
+    API_PORT: z.coerce.number(),
   },
 
   /**
