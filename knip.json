@@ -6,12 +6,14 @@
     "@faker-js/faker",
     "kysely",
     "@ianvs/prettier-plugin-sort-imports",
-    "prettier-plugin-tailwindcss"
+    "prettier-plugin-tailwindcss",
+    "tsx"
   ],
   "ignore": [
     "./packages/db/migrations/**/*.ts",
     "./packages/auth/src/seeds/**/*.ts",
-    "./**/*/kysely.config.ts"
+    "./**/kysely.config.ts",
+    "./**/env.ts"
   ],
   "ignoreUnresolved": ["next"]
 }

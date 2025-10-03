@@ -3,6 +3,7 @@ import { createNodeWebSocket } from "@hono/node-ws"
 import { Hono } from "hono"
 import { cors } from "hono/cors"
 import { auth } from "@repo/auth/server"
+import { config } from "@repo/config"
 import { db } from "@repo/db"
 import { app as chatApp } from "./routes/chat"
 import { app as contactsApp } from "./routes/contacts"
@@ -37,7 +38,7 @@ app.onError((err, c) => {
   return c.var.fail("internal_server_error")
 })
 
-const server = serve({ fetch: app.fetch, port: 3001 }, (info) => {
+const server = serve({ fetch: app.fetch, port: config.api.port }, (info) => {
   console.log(`Server is running on http://localhost:${info.port}`)
 })
 
