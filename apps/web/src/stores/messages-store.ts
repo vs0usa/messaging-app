@@ -45,7 +45,9 @@ export const useMessagesStore = create<State>(
           openChats: state.openChats.filter((id) => id !== userId),
         })),
       setMessages: (recipientId: string, messages: ChatMessage[]) =>
-        set(() => ({ messages: { [recipientId]: messages } })),
+        set((state) => ({
+          messages: { ...state.messages, [recipientId]: messages },
+        })),
       addMessage: (recipientId: string, message: ChatMessage) =>
         set((state) => ({
           messages: {
