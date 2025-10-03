@@ -23,9 +23,11 @@
     "zod": "^4.1.11"
   },
   "devDependencies": {
+    "@faker-js/faker": "^10.0.0",
     "@repo/eslint-config": "workspace:*",
     "@repo/typescript-config": "workspace:*",
     "dotenv-cli": "^10.0.0",
+    "kysely": "^0.27.2",
     "typescript": "^5.9.2"
   }
 }
