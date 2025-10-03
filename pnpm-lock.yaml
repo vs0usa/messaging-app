@@ -86,6 +86,9 @@ importers:
       zustand:
         specifier: ^5.0.8
         version: 5.0.8(@types/react@19.1.0)(react@19.1.1)
+      zustand-sync-tabs:
+        specifier: ^0.2.3
+        version: 0.2.3(zustand@5.0.8(@types/react@19.1.0)(react@19.1.1))
     devDependencies:
       '@repo/eslint-config':
         specifier: workspace:*
@@ -2671,6 +2674,11 @@ packages:
   zod@4.1.11:
     resolution: {integrity: sha512-WPsqwxITS2tzx1bzhIKsEs19ABD5vmCVa4xBo2tq/SrV4RNZtfws1EnCWQXM6yh8bD08a1idvkB5MZSBiZsjwg==}
 
+  zustand-sync-tabs@0.2.3:
+    resolution: {integrity: sha512-NtA4g0v6bh34jYzbGVgjsfR6rPjlUc9Oj6QAeKWikxV3UIYEhPo9AEbAk/3X0p6H1o/waBKqZ/nLfRuz7OH4rA==}
+    peerDependencies:
+      zustand: '>=3.0.0 <6.0.0'
+
   zustand@5.0.8:
     resolution: {integrity: sha512-gyPKpIaxY9XcO2vSMrLbiER7QMAMGOQZVRdJ6Zi782jkbzZygq5GI9nG8g+sMgitRtndwaBSl7uiqC49o1SSiw==}
     engines: {node: '>=12.20.0'}
@@ -5176,6 +5184,10 @@ snapshots:
   yocto-queue@0.1.0: {}
 
   zod@4.1.11: {}
+
+  zustand-sync-tabs@0.2.3(zustand@5.0.8(@types/react@19.1.0)(react@19.1.1)):
+    dependencies:
+      zustand: 5.0.8(@types/react@19.1.0)(react@19.1.1)
 
   zustand@5.0.8(@types/react@19.1.0)(react@19.1.1):
     optionalDependencies:

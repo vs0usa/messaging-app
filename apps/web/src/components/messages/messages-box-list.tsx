@@ -4,15 +4,27 @@ import { apiClient } from "@/api/client"
 import { call } from "@/utils/call"
 import { Avatar } from "@repo/ui/components/avatar"
 import { formatMessageDate } from "@/utils/date-format"
+import { useMessagesStore } from "@/stores/messages-store"
+import { useEffect } from "react"
 
 export const MessagesBoxList = () => {
+  const { setContacts, openChat, setCurrentChat } = useMessagesStore()
   const { data: users, isPending } = useQuery({
     queryKey: ["get-contacts"],
     queryFn: call(apiClient.contacts.$get),
   })
 
+  // Set contacts when users are fetched
+  useEffect(() => {
+    if (users) {
+      setContacts(
+        users.data.map((u) => ({ id: u.id, name: u.name, image: u.image })),
+      )
+    }
+  }, [setContacts, users])
+
   return (
-    <div className="border-t h-full bg-popover border-x flex flex-col">
+    <div className="border-t h-full bg-popover border-x flex flex-col overflow-y-auto">
       {isPending && (
         <>
           <Skeleton className="h-12 rounded" />
@@ -23,9 +35,13 @@ export const MessagesBoxList = () => {
       )}
       {users &&
         users.data.map((u) => (
-          <div
+          <button
             key={u.id}
-            className="flex items-center gap-2 p-2 hover:bg-accent transition-colors cursor-pointer"
+            className="flex items-center gap-2 p-2 hover:bg-accent transition-colors cursor-pointer text-start"
+            onClick={() => {
+              openChat(u.id)
+              setCurrentChat(u.id)
+            }}
           >
             <Avatar
               className="max-size-10"
@@ -45,7 +61,7 @@ export const MessagesBoxList = () => {
                 {u.lastMessage || "No messages yet"}
               </p>
             </div>
-          </div>
+          </button>
         ))}
     </div>
   )

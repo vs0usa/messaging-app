@@ -1,6 +1,7 @@
 "use client"
 
 import { Session, User } from "@repo/auth/server"
+import { syncTabs } from "zustand-sync-tabs"
 import { createContext, ReactNode, useContext, useRef } from "react"
 import { createStore, useStore } from "zustand"
 
@@ -15,16 +16,21 @@ type State = {
 type AuthStore = ReturnType<typeof createAuthStore>
 
 const createAuthStore = (session: Session | null) =>
-  createStore<State>((set) => ({
-    user: session?.user ?? null,
-    session: session?.session ?? null,
-    signIn: (user) => {
-      set({ user, session: null })
-    },
-    signOut: () => {
-      set({ user: null, session: null })
-    },
-  }))
+  createStore<State>(
+    syncTabs(
+      (set) => ({
+        user: session?.user ?? null,
+        session: session?.session ?? null,
+        signIn: (user) => {
+          set({ user, session: null })
+        },
+        signOut: () => {
+          set({ user: null, session: null })
+        },
+      }),
+      { name: "auth" },
+    ),
+  )
 
 /**
  * React part.
