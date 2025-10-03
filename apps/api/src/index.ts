@@ -7,7 +7,6 @@ import { config } from "@repo/config"
 import { db } from "@repo/db"
 import { app as chatApp } from "./routes/chat"
 import { app as contactsApp } from "./routes/contacts"
-import { app as messagesApp } from "./routes/messages"
 import { fail, send } from "./utils/context"
 
 export const app = new Hono().basePath("/api")
@@ -27,10 +26,7 @@ app.use(cors({ origin: config.web.baseUrl, credentials: true }))
 app.on(["GET", "POST"], "/auth/*", (c) => auth.handler(c.req.raw))
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-const routes = app
-  .route("/contacts", contactsApp)
-  .route("/messages", messagesApp)
-  .route("/chat", chatApp)
+const routes = app.route("/contacts", contactsApp).route("/chat", chatApp)
 
 app.onError((err, c) => {
   console.error(err)
@@ -45,3 +41,8 @@ const server = serve({ fetch: app.fetch, port: config.api.port }, (info) => {
 injectWebSocket(server)
 
 export type AppType = typeof routes
+export type {
+  ChatMessage,
+  ServerWsMessage,
+  ClientWsMessage,
+} from "./utils/format-ws-message"

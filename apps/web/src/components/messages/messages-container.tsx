@@ -6,7 +6,6 @@ import { MessagesBox } from "./messages-box"
 
 export const MessagesContainer = () => {
   const { user } = useAuth()
-  // const { dynamicWidth } = useBreakpoints()
 
   if (!user) return null
 

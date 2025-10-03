@@ -2,12 +2,14 @@ import { useEffect } from "react"
 import { useQuery } from "@tanstack/react-query"
 import { Avatar } from "@repo/ui/components/avatar"
 import { Skeleton } from "@repo/ui/components/skeleton"
+import { useChat } from "@/hooks/use-chat"
 import { useMessagesStore } from "@/stores/messages-store"
 import { apiClient, call } from "@/utils/call"
 import { formatMessageDate } from "@/utils/date-format"
 
 export const MessagesBoxList = () => {
   const { setContacts, openChat, setRecipientId } = useMessagesStore()
+  const { askMessages } = useChat()
   const { data: users, isPending } = useQuery({
     queryKey: ["get-contacts"],
     queryFn: call(apiClient.contacts.$get),
@@ -39,6 +41,7 @@ export const MessagesBoxList = () => {
           onClick={() => {
             openChat(u.id)
             setRecipientId(u.id)
+            askMessages(u.id)
           }}
         >
           <Avatar
@@ -51,7 +54,7 @@ export const MessagesBoxList = () => {
           <div className="flex flex-col">
             <div className="flex items-center justify-between gap-1">
               <p className="line-clamp-1 text-sm font-medium">{u.name}</p>
-              <div className="text-muted-foreground text-xs">
+              <div className="text-muted-foreground min-w-fit text-xs">
                 {formatMessageDate(u.lastMessageAt)}
               </div>
             </div>
