@@ -4,8 +4,8 @@ import Image from "next/image"
 
 export default function Page() {
   return (
-    <main className="flex min-h-dvh flex-col items-center justify-center bg-background p-4">
-      <div className="flex flex-col gap-6 items-center">
+    <main className="bg-background flex min-h-dvh flex-col items-center justify-center p-4">
+      <div className="flex flex-col items-center gap-6">
         <div className="flex flex-col items-center text-center">
           <Link href="/" className="mb-4">
             <Image
@@ -23,7 +23,7 @@ export default function Page() {
         </div>
         <SignInForm />
         <div className="max-w-sm text-center">
-          <p className="text-sm text-muted-foreground">
+          <p className="text-muted-foreground text-sm">
             Don&apos;t have an account yet?{" "}
             <Link href="/auth/sign-up">Sign up</Link>
           </p>

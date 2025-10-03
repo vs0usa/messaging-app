@@ -24,7 +24,7 @@ export const MessagesBoxList = () => {
   }, [setContacts, users])
 
   return (
-    <div className="border-t h-full bg-popover border-x flex flex-col overflow-y-auto">
+    <div className="bg-popover flex h-full flex-col overflow-y-auto border-x border-t">
       {isPending && (
         <>
           <Skeleton className="h-12 rounded" />
@@ -37,7 +37,7 @@ export const MessagesBoxList = () => {
         users.data.map((u) => (
           <button
             key={u.id}
-            className="flex items-center gap-2 p-2 hover:bg-accent transition-colors cursor-pointer text-start"
+            className="hover:bg-accent flex cursor-pointer items-center gap-2 p-2 text-start transition-colors"
             onClick={() => {
               openChat(u.id)
               setCurrentChat(u.id)
@@ -52,12 +52,12 @@ export const MessagesBoxList = () => {
             />
             <div className="flex flex-col">
               <div className="flex items-center justify-between gap-1">
-                <p className="font-medium text-sm line-clamp-1">{u.name}</p>
-                <div className="text-xs text-muted-foreground">
+                <p className="line-clamp-1 text-sm font-medium">{u.name}</p>
+                <div className="text-muted-foreground text-xs">
                   {formatMessageDate(u.lastMessageAt)}
                 </div>
               </div>
-              <p className="text-xs text-muted-foreground line-clamp-2">
+              <p className="text-muted-foreground line-clamp-2 text-xs">
                 {u.lastMessage || "No messages yet"}
               </p>
             </div>

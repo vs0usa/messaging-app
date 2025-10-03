@@ -10,7 +10,7 @@ export const Navbar = () => {
   const user = useUser()
 
   return (
-    <nav className="fixed top-0 z-10 flex px-4 py-3 m-4 bg-sidebar h-14 rounded-xl w-[-webkit-fill-available] justify-between items-center border">
+    <nav className="bg-sidebar fixed top-0 z-10 m-4 flex h-14 w-[-webkit-fill-available] items-center justify-between rounded-xl border px-4 py-3">
       <Link href="/">
         <Image
           src="/logo.png"

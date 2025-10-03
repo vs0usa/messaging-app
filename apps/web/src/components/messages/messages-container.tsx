@@ -11,7 +11,7 @@ export const MessagesContainer = () => {
   if (!user) return null
 
   return (
-    <div className="fixed bottom-0 w-screen z-10 px-4 md:flex flex-row-reverse gap-4 hidden">
+    <div className="fixed bottom-0 z-10 hidden w-screen flex-row-reverse gap-4 px-4 md:flex">
       <MessagesBox />
       <OpenedChats />
     </div>

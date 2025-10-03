@@ -13,16 +13,16 @@ export const MessagesBox = () => {
 
   return (
     <motion.div
-      className="w-64 flex flex-col"
+      className="flex w-64 flex-col"
       initial={{ height: "48px" }}
       animate={{ height: boxExpanded ? "60vh" : "48px" }}
       transition={{ duration: 0.3, ease: "easeInOut" }}
     >
       <div
-        className="flex items-center relative select-none cursor-pointer"
+        className="relative flex cursor-pointer select-none items-center"
         onClick={toggleBox}
       >
-        <div className="flex gap-2 items-center w-full bg-popover hover:bg-accent px-2 h-12 transition-colors rounded-t-md border border-b-0">
+        <div className="bg-popover hover:bg-accent flex h-12 w-full items-center gap-2 rounded-t-md border border-b-0 px-2 transition-colors">
           <Avatar
             className="max-size-8"
             src={user!.image}
@@ -32,16 +32,16 @@ export const MessagesBox = () => {
           />
           <p className="font-medium">Messages</p>
         </div>
-        <div className="flex absolute right-2">
+        <div className="absolute right-2 flex">
           <button
-            className="p-2 hover:bg-accent transition-[background-color,rotate] rounded-full data-[expanded=true]:rotate-180"
+            className="hover:bg-accent rounded-full p-2 transition-[background-color,rotate] data-[expanded=true]:rotate-180"
             data-expanded={boxExpanded}
             onClick={(e) => {
               e.stopPropagation()
               toggleBox()
             }}
           >
-            <ChevronUpIcon className="size-4 text-muted-foreground" />
+            <ChevronUpIcon className="text-muted-foreground size-4" />
           </button>
         </div>
       </div>

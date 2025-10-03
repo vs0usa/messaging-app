@@ -27,12 +27,12 @@ export const OpenedChats = () => {
             transition={{ duration: 0.3, ease: "easeInOut" }}
           >
             <div
-              className="flex items-center relative select-none cursor-pointer"
+              className="relative flex cursor-pointer select-none items-center"
               onClick={() =>
                 setCurrentChat(currentChat === userId ? null : userId)
               }
             >
-              <div className="flex gap-2 items-center w-full bg-popover hover:bg-accent px-2 h-12 transition-colors rounded-t-md border border-b-0 relative pr-12">
+              <div className="bg-popover hover:bg-accent relative flex h-12 w-full items-center gap-2 rounded-t-md border border-b-0 px-2 pr-12 transition-colors">
                 <Avatar
                   className="max-size-8"
                   src={user.image}
@@ -40,21 +40,21 @@ export const OpenedChats = () => {
                   width={32}
                   alt={user.name}
                 />
-                <p className="font-medium line-clamp-1">{user.name}</p>
+                <p className="line-clamp-1 font-medium">{user.name}</p>
               </div>
-              <div className="flex absolute right-2">
+              <div className="absolute right-2 flex">
                 <button
-                  className="p-2 hover:bg-accent transition-[background-color,rotate] rounded-full"
+                  className="hover:bg-accent rounded-full p-2 transition-[background-color,rotate]"
                   onClick={(e) => {
                     e.stopPropagation()
                     closeChat(userId)
                   }}
                 >
-                  <XIcon className="size-4 text-muted-foreground" />
+                  <XIcon className="text-muted-foreground size-4" />
                 </button>
               </div>
             </div>
-            <div className="border-t h-full bg-popover border-x flex flex-col overflow-y-auto">
+            <div className="bg-popover flex h-full flex-col overflow-y-auto border-x border-t">
               <p>azert</p>
             </div>
           </motion.div>

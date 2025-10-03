@@ -1,7 +1,7 @@
 export default function Page() {
   return (
-    <main className="flex items-center justify-center h-screen">
-      <div className="space-y-6 text-center p-4">
+    <main className="flex h-screen items-center justify-center">
+      <div className="space-y-6 p-4 text-center">
         <h1 className="text-3xl font-bold underline underline-offset-8">
           Welcome to the messaging app!
         </h1>

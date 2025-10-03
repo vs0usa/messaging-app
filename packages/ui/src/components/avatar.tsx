@@ -12,7 +12,7 @@ export const Avatar = ({ src, className, ...props }: Props) => {
   return (
     <div
       className={cn(
-        "relative rounded-full bg-accent p-2 text-accent-foreground border",
+        "bg-accent text-accent-foreground relative rounded-full border p-2",
         className,
       )}
       style={{

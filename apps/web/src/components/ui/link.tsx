@@ -8,7 +8,7 @@ export const Link = ({
 }: ComponentProps<typeof NextLink> & { className?: string }) => (
   <NextLink
     className={cn(
-      "text-sm text-primary hover:text-primary/80 underline",
+      "text-primary hover:text-primary/80 text-sm underline",
       className,
     )}
     {...props}
