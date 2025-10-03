@@ -13,7 +13,7 @@
     "generate-migrations": "pnpm with-env pnpm dlx @better-auth/cli generate --config ./src/config.ts -y",
     "with-env": "dotenv -e ../../.env --",
     "lint": "eslint .",
-    "type-check": "tsc --noEmit"
+    "check-types": "tsc --noEmit"
   },
   "dependencies": {
     "@faker-js/faker": "^10.0.0",
