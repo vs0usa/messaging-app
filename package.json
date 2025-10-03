@@ -5,7 +5,8 @@
     "build": "turbo run build",
     "dev": "turbo run dev",
     "lint": "turbo run lint",
-    "format": "prettier --write \"**/*.{js,ts,tsx,css,json,md}\"",
+    "format": "prettier --check \"**/*.{js,ts,tsx,css,json,md}\"",
+    "format:fix": "prettier --write \"**/*.{js,ts,tsx,css,json,md}\"",
     "check-types": "turbo run check-types"
   },
   "devDependencies": {
