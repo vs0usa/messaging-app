@@ -43,13 +43,13 @@ importers:
         version: 4.9.7
     devDependencies:
       '@repo/eslint-config':
-        specifier: workspace:*
+        specifier: workspace:^
         version: link:../../packages/eslint-config
       '@repo/prettier-config':
         specifier: workspace:^
         version: link:../../packages/prettier-config
       '@repo/typescript-config':
-        specifier: workspace:*
+        specifier: workspace:^
         version: link:../../packages/typescript-config
       '@types/node':
         specifier: ^22.15.3
@@ -85,7 +85,7 @@ importers:
         specifier: workspace:^
         version: link:../../packages/db
       '@repo/ui':
-        specifier: workspace:*
+        specifier: workspace:^
         version: link:../../packages/ui
       '@t3-oss/env-nextjs':
         specifier: ^0.13.8
@@ -149,13 +149,13 @@ importers:
         specifier: workspace:^
         version: link:../api
       '@repo/eslint-config':
-        specifier: workspace:*
+        specifier: workspace:^
         version: link:../../packages/eslint-config
       '@repo/prettier-config':
         specifier: workspace:^
         version: link:../../packages/prettier-config
       '@repo/typescript-config':
-        specifier: workspace:*
+        specifier: workspace:^
         version: link:../../packages/typescript-config
       '@types/luxon':
         specifier: ^3.7.1
@@ -207,13 +207,13 @@ importers:
         specifier: ^10.0.0
         version: 10.0.0
       '@repo/eslint-config':
-        specifier: workspace:*
+        specifier: workspace:^
         version: link:../eslint-config
       '@repo/prettier-config':
         specifier: workspace:^
         version: link:../prettier-config
       '@repo/typescript-config':
-        specifier: workspace:*
+        specifier: workspace:^
         version: link:../typescript-config
       dotenv-cli:
         specifier: ^10.0.0
@@ -244,13 +244,13 @@ importers:
         version: 4.1.11
     devDependencies:
       '@repo/eslint-config':
-        specifier: workspace:*
+        specifier: workspace:^
         version: link:../eslint-config
       '@repo/prettier-config':
         specifier: workspace:^
         version: link:../prettier-config
       '@repo/typescript-config':
-        specifier: workspace:*
+        specifier: workspace:^
         version: link:../typescript-config
       eslint:
         specifier: ^9.36.0
@@ -281,13 +281,13 @@ importers:
         version: 4.1.11
     devDependencies:
       '@repo/eslint-config':
-        specifier: workspace:*
+        specifier: workspace:^
         version: link:../eslint-config
       '@repo/prettier-config':
         specifier: workspace:^
         version: link:../prettier-config
       '@repo/typescript-config':
-        specifier: workspace:*
+        specifier: workspace:^
         version: link:../typescript-config
       '@types/pg':
         specifier: ^8.11.10
@@ -323,10 +323,10 @@ importers:
         specifier: ^15.5.2
         version: 15.5.4
       '@repo/prettier-config':
-        specifier: workspace:*
+        specifier: workspace:^
         version: link:../prettier-config
       '@repo/typescript-config':
-        specifier: workspace:*
+        specifier: workspace:^
         version: link:../typescript-config
       eslint:
         specifier: ^9.36.0
@@ -361,7 +361,7 @@ importers:
         specifier: ^4.7.0
         version: 4.7.0(prettier@3.6.2)
       '@repo/typescript-config':
-        specifier: workspace:*
+        specifier: workspace:^
         version: link:../typescript-config
       '@types/node':
         specifier: ^22.15.3
@@ -433,13 +433,13 @@ importers:
         version: 1.4.0
     devDependencies:
       '@repo/eslint-config':
-        specifier: workspace:*
+        specifier: workspace:^
         version: link:../eslint-config
       '@repo/prettier-config':
         specifier: workspace:^
         version: link:../prettier-config
       '@repo/typescript-config':
-        specifier: workspace:*
+        specifier: workspace:^
         version: link:../typescript-config
       '@types/node':
         specifier: ^22.15.3

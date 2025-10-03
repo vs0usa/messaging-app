@@ -24,9 +24,9 @@
     "hono": "4.9.7"
   },
   "devDependencies": {
-    "@repo/eslint-config": "workspace:*",
+    "@repo/eslint-config": "workspace:^",
     "@repo/prettier-config": "workspace:^",
-    "@repo/typescript-config": "workspace:*",
+    "@repo/typescript-config": "workspace:^",
     "@types/node": "^22.15.3",
     "dotenv-cli": "^10.0.0",
     "eslint": "^9.36.0",

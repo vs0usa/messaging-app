@@ -21,9 +21,9 @@
     "zod": "^4.1.11"
   },
   "devDependencies": {
-    "@repo/eslint-config": "workspace:*",
+    "@repo/eslint-config": "workspace:^",
     "@repo/prettier-config": "workspace:^",
-    "@repo/typescript-config": "workspace:*",
+    "@repo/typescript-config": "workspace:^",
     "@types/pg": "^8.11.10",
     "dotenv-cli": "^10.0.0",
     "eslint": "^9.36.0",

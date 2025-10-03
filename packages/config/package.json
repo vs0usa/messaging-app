@@ -17,9 +17,9 @@
     "zod": "^4.1.11"
   },
   "devDependencies": {
-    "@repo/eslint-config": "workspace:*",
+    "@repo/eslint-config": "workspace:^",
     "@repo/prettier-config": "workspace:^",
-    "@repo/typescript-config": "workspace:*",
+    "@repo/typescript-config": "workspace:^",
     "eslint": "^9.36.0",
     "prettier": "^3.6.2",
     "typescript": "^5.9.2",

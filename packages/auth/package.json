@@ -25,9 +25,9 @@
   },
   "devDependencies": {
     "@faker-js/faker": "^10.0.0",
-    "@repo/eslint-config": "workspace:*",
+    "@repo/eslint-config": "workspace:^",
     "@repo/prettier-config": "workspace:^",
-    "@repo/typescript-config": "workspace:*",
+    "@repo/typescript-config": "workspace:^",
     "dotenv-cli": "^10.0.0",
     "eslint": "^9.36.0",
     "kysely": "^0.27.2",
