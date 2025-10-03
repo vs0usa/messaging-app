@@ -91,7 +91,7 @@ export async function up(db: Kysely<any>): Promise<void> {
     .execute()
 
   // Create function for updating updatedAt timestamps
-  sql`
+  await sql`
 		CREATE OR REPLACE FUNCTION update_updated_at_column()
 		RETURNS TRIGGER AS $$
 		BEGIN
@@ -102,13 +102,13 @@ export async function up(db: Kysely<any>): Promise<void> {
 	`.execute(db)
 
   // Create triggers for updatedAt timestamps
-  sql`
+  await sql`
 		CREATE TRIGGER update_users_updated_at 
 		BEFORE UPDATE ON users
 		FOR EACH ROW EXECUTE FUNCTION update_updated_at_column();
 	`.execute(db)
 
-  sql`
+  await sql`
 		CREATE TRIGGER update_messages_updated_at 
 		BEFORE UPDATE ON messages
 		FOR EACH ROW EXECUTE FUNCTION update_updated_at_column();
@@ -116,11 +116,13 @@ export async function up(db: Kysely<any>): Promise<void> {
 }
 
 export async function down(db: Kysely<any>): Promise<void> {
-  sql`DROP TRIGGER IF EXISTS update_users_updated_at ON users;`.execute(db)
-  sql`DROP TRIGGER IF EXISTS update_messages_updated_at ON messages;`.execute(
+  await sql`DROP TRIGGER IF EXISTS update_users_updated_at ON users;`.execute(
     db,
   )
-  sql`DROP FUNCTION IF EXISTS update_updated_at_column();`.execute(db)
+  await sql`DROP TRIGGER IF EXISTS update_messages_updated_at ON messages;`.execute(
+    db,
+  )
+  await sql`DROP FUNCTION IF EXISTS update_updated_at_column();`.execute(db)
 
   await db.schema.dropIndex("idx_attachments_message_id").execute()
   await db.schema.dropIndex("idx_messages_created_at").execute()

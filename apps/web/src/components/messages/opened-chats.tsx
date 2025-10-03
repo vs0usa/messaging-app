@@ -12,7 +12,9 @@ export const OpenedChats = () => {
   return (
     <div>
       {filteredChats.map((userId, i) => {
-        const user = contacts.find((user) => user.id === userId)!
+        const user = contacts.find((user) => user.id === userId)
+
+        if (!user) return null
 
         return (
           <motion.div

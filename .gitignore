@@ -19,8 +19,10 @@ coverage
 .turbo
 .cache
 
-# Vercel
-.vercel
+# Next.js
+.next/
+out/
+next-env.d.ts
 
 # Build Outputs
 .next/

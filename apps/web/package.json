@@ -9,7 +9,7 @@
     "start": "pnpm with-env next start",
     "with-env": "dotenv -e ../../.env --",
     "format": "prettier --check . --ignore-path ../../.gitignore",
-    "lint": "next lint . --max-warnings 0",
+    "lint": "eslint .",
     "check-types": "tsc --noEmit"
   },
   "dependencies": {

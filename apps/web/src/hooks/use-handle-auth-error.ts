@@ -1,6 +1,6 @@
 "use client"
 
-import { ErrorContext } from "better-auth/react"
+import type { ErrorContext } from "better-auth/react"
 import { authMessages } from "@repo/auth/utils"
 import { toast } from "@repo/ui/components/sonner"
 

@@ -1,4 +1,4 @@
-import { InferResponseType } from "hono"
+import type { InferResponseType } from "hono"
 import { ApiError, errorSchema } from "@/utils/api-error"
 
 export const call =
@@ -11,7 +11,7 @@ export const call =
     }
 
     try {
-      const error = await response.json()
+      const error: unknown = await response.json()
       const parsedError = errorSchema.parse(error)
 
       throw new ApiError(

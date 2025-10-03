@@ -30,12 +30,14 @@ export const NavbarAuthedContent = () => {
     })
   }
 
+  if (!user) return null
+
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
         <button className="outline-none" type="button">
           <Avatar
-            src={user!.image}
+            src={user.image}
             className="max-size-9 hover:opacity-80"
             width={40}
             height={40}

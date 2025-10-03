@@ -1,5 +1,5 @@
-import { Context } from "hono"
-import { Database, Kysely } from "@repo/db"
+import type { Context } from "hono"
+import type { Database, Kysely } from "@repo/db"
 
 type Meta = Record<string, string | number>
 
@@ -17,7 +17,7 @@ export const fail = (ctx: Context) => (errorName: string, message?: string) =>
     success: false,
     error: {
       name: errorName,
-      message: message || "Unknown error",
+      message: message ?? "Unknown error",
     },
   })
 

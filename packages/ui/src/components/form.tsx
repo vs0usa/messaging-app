@@ -1,8 +1,8 @@
 "use client"
 
+import type { ComponentProps } from "react"
 import type { ControllerProps, FieldPath, FieldValues } from "react-hook-form"
-import { ComponentProps, createContext, useContext, useId } from "react"
-import * as LabelPrimitive from "@radix-ui/react-label"
+import { createContext, useContext, useId } from "react"
 import { Slot } from "@radix-ui/react-slot"
 import {
   Controller,
@@ -10,16 +10,17 @@ import {
   useFormContext,
   useFormState,
 } from "react-hook-form"
+import type * as LabelPrimitive from "@radix-ui/react-label"
 import { cn } from "../lib/utils"
 import { Button } from "./button"
 import { Label } from "./label"
 
 export const Form = FormProvider
 
-type FormFieldContextValue<
+interface FormFieldContextValue<
   TFieldValues extends FieldValues = FieldValues,
   TName extends FieldPath<TFieldValues> = FieldPath<TFieldValues>,
-> = {
+> {
   name: TName
 }
 
@@ -47,6 +48,7 @@ export const useFormField = () => {
   const formState = useFormState({ name: fieldContext.name })
   const fieldState = getFieldState(fieldContext.name, formState)
 
+  // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
   if (!fieldContext) {
     throw new Error("useFormField should be used within <FormField>")
   }
@@ -63,7 +65,7 @@ export const useFormField = () => {
   }
 }
 
-type FormItemContextValue = {
+interface FormItemContextValue {
   id: string
 }
 
@@ -138,7 +140,7 @@ export const FormDescription = ({
 
 export const FormMessage = ({ className, ...props }: ComponentProps<"p">) => {
   const { error, formMessageId } = useFormField()
-  const body = error ? String(error?.message ?? "") : props.children
+  const body = error ? String(error.message ?? "") : props.children
 
   if (!body) {
     return null
@@ -163,9 +165,7 @@ export const FormButton = ({
 }: ComponentProps<typeof Button>) => {
   const { isSubmitting, isValid, isDirty, errors } = useFormState()
   const shouldDisable =
-    isSubmitting ||
-    !(isValid && isDirty) ||
-    disabled ||
+    (isSubmitting || !(isValid && isDirty) || disabled) ??
     Object.keys(errors).length > 0
 
   return (

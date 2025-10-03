@@ -33,36 +33,35 @@ export const MessagesBoxList = () => {
           <Skeleton className="h-12 rounded" />
         </>
       )}
-      {users &&
-        users.data.map((u) => (
-          <button
-            key={u.id}
-            className="hover:bg-accent flex cursor-pointer items-center gap-2 p-2 text-start transition-colors"
-            onClick={() => {
-              openChat(u.id)
-              setCurrentChat(u.id)
-            }}
-          >
-            <Avatar
-              className="max-size-10"
-              src={u.image}
-              height={40}
-              width={40}
-              alt={u.name}
-            />
-            <div className="flex flex-col">
-              <div className="flex items-center justify-between gap-1">
-                <p className="line-clamp-1 text-sm font-medium">{u.name}</p>
-                <div className="text-muted-foreground text-xs">
-                  {formatMessageDate(u.lastMessageAt)}
-                </div>
+      {users?.data.map((u) => (
+        <button
+          key={u.id}
+          className="hover:bg-accent flex cursor-pointer items-center gap-2 p-2 text-start transition-colors"
+          onClick={() => {
+            openChat(u.id)
+            setCurrentChat(u.id)
+          }}
+        >
+          <Avatar
+            className="max-size-10"
+            src={u.image}
+            height={40}
+            width={40}
+            alt={u.name}
+          />
+          <div className="flex flex-col">
+            <div className="flex items-center justify-between gap-1">
+              <p className="line-clamp-1 text-sm font-medium">{u.name}</p>
+              <div className="text-muted-foreground text-xs">
+                {formatMessageDate(u.lastMessageAt)}
               </div>
-              <p className="text-muted-foreground line-clamp-2 text-xs">
-                {u.lastMessage || "No messages yet"}
-              </p>
             </div>
-          </button>
-        ))}
+            <p className="text-muted-foreground line-clamp-2 text-xs">
+              {u.lastMessage}
+            </p>
+          </div>
+        </button>
+      ))}
     </div>
   )
 }

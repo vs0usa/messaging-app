@@ -5,6 +5,7 @@ import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
 import z from "zod"
 import { authClient } from "@repo/auth/client"
+import type { User } from "@repo/auth/server"
 import {
   Form,
   FormButton,
@@ -43,7 +44,7 @@ export const SignInForm = () => {
       fetchOptions: {
         onError: handleError,
         onSuccess: (data) => {
-          signIn(data.data.user)
+          signIn((data.data as { user: User }).user)
           router.push("/")
           toast.success("Welcome to the app!")
         },

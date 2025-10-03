@@ -11,6 +11,8 @@ export const MessagesBox = () => {
   const user = useUser()
   const { boxExpanded, toggleBox } = useMessagesStore()
 
+  if (!user) return null
+
   return (
     <motion.div
       className="flex w-64 flex-col"
@@ -25,7 +27,7 @@ export const MessagesBox = () => {
         <div className="bg-popover hover:bg-accent flex h-12 w-full items-center gap-2 rounded-t-md border border-b-0 px-2 transition-colors">
           <Avatar
             className="max-size-8"
-            src={user!.image}
+            src={user.image}
             height={32}
             width={32}
             alt="Avatar"

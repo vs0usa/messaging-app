@@ -1,4 +1,4 @@
-import { ComponentProps } from "react"
+import type { ComponentProps } from "react"
 import NextLink from "next/link"
 import { cn } from "@repo/ui/lib/utils"
 

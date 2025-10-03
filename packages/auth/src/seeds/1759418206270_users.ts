@@ -1,6 +1,6 @@
 import type { Kysely } from "kysely"
 import { faker } from "@faker-js/faker"
-import { Database } from "@repo/db"
+import type { Database } from "@repo/db"
 import { auth } from "../config"
 import { authEnv } from "../env"
 

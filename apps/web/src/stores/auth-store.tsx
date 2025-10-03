@@ -1,11 +1,12 @@
 "use client"
 
-import { createContext, ReactNode, useContext, useRef } from "react"
+import type { ReactNode } from "react"
+import { createContext, useContext, useRef } from "react"
 import { createStore, useStore } from "zustand"
 import { syncTabs } from "zustand-sync-tabs"
-import { Session, User } from "@repo/auth/server"
+import type { Session, User } from "@repo/auth/server"
 
-type State = {
+interface State {
   user: User | null
   session: Session["session"] | null
 
@@ -46,9 +47,7 @@ export const AuthStoreProvider = ({
 }) => {
   const storeRef = useRef<AuthStore>(null)
 
-  if (!storeRef.current) {
-    storeRef.current = createAuthStore(session)
-  }
+  storeRef.current ??= createAuthStore(session)
 
   return (
     <AuthContext.Provider value={storeRef.current}>

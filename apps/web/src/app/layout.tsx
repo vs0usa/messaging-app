@@ -6,7 +6,7 @@ import { ThemeProvider } from "next-themes"
 import { Toaster } from "@repo/ui/components/sonner"
 import { AuthStoreProvider } from "@/stores/auth-store"
 import { getSession } from "@/utils/get-session"
-import { LayoutProps } from "@/utils/types"
+import type { LayoutProps } from "@/utils/types"
 import { Providers } from "./_components/providers"
 
 const inter = Inter({ subsets: ["latin"] })
