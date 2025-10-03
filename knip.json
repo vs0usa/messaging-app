@@ -1,17 +1,16 @@
 {
   "$schema": "https://unpkg.com/knip@5/schema.json",
-  "ignoreBinaries": ["eslint"],
   "ignoreDependencies": [
-    "@repo/eslint-config",
     "tw-animate-css",
     "kysely-ctl",
     "@faker-js/faker",
-    "kysely"
+    "kysely",
+    "@ianvs/prettier-plugin-sort-imports",
+    "prettier-plugin-tailwindcss"
   ],
   "ignore": [
     "./packages/db/migrations/**/*.ts",
     "./packages/auth/src/seeds/**/*.ts",
-    "./**/*/eslint.config.mjs",
     "./**/*/kysely.config.ts"
   ],
   "ignoreUnresolved": ["next"]
