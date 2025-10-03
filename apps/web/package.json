@@ -45,6 +45,6 @@
     "@types/react-dom": "19.1.1",
     "dotenv-cli": "^10.0.0",
     "eslint": "^9.34.0",
-    "typescript": "5.9.2"
+    "typescript": "^5.9.2"
   }
 }

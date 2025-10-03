@@ -15,6 +15,17 @@ env:
   FORCE_COLOR: 3
 
 jobs:
+  lint-ws:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+
+      - name: Setup
+        uses: ./packages/github-config/setup
+
+      - name: Lint Workspaces
+        run: pnpm lint:ws
+
   knip:
     runs-on: ubuntu-latest
     steps:

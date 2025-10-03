@@ -6,6 +6,7 @@
     "dev": "turbo run dev",
     "knip": "knip",
     "lint": "turbo run lint",
+    "lint:ws": "sherif",
     "format": "prettier --check \"**/*.{js,ts,tsx,css,json,md}\"",
     "format:fix": "prettier --write \"**/*.{js,ts,tsx,css,json,md}\"",
     "check-types": "turbo run check-types"
@@ -13,8 +14,9 @@
   "devDependencies": {
     "knip": "^5.64.1",
     "prettier": "^3.6.2",
+    "sherif": "^1.6.1",
     "turbo": "^2.5.8",
-    "typescript": "5.9.2"
+    "typescript": "^5.9.2"
   },
   "packageManager": "pnpm@9.0.0",
   "engines": {
