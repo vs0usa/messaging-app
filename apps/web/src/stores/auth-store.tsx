@@ -76,13 +76,3 @@ export const useUser = () => {
 
   return useStore(store, (state) => state.user)
 }
-
-export const useSession = () => {
-  const store = useContext(AuthContext)
-
-  if (!store) {
-    throw new Error("useSession must be used within a AuthContext")
-  }
-
-  return useStore(store, (state) => state.session)
-}
