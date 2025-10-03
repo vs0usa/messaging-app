@@ -29,7 +29,7 @@ export async function seed(db: Kysely<Database>) {
   const insertedUsers = await db.selectFrom("users").selectAll().execute()
   const messages = []
 
-  for (let i = 0; i < 50; i++) {
+  for (let i = 0; i < 100; i++) {
     const sender = faker.helpers.arrayElement(insertedUsers)
     const recipient = faker.helpers.arrayElement(
       insertedUsers.filter((u) => u.id !== sender.id),
