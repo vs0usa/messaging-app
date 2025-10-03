@@ -12,6 +12,7 @@
   "scripts": {
     "generate-migrations": "pnpm with-env pnpm dlx @better-auth/cli generate --config ./src/config.ts -y",
     "with-env": "dotenv -e ../../.env --",
+    "format": "prettier --check . --ignore-path ../../.gitignore",
     "lint": "eslint .",
     "check-types": "tsc --noEmit"
   },
@@ -25,9 +26,13 @@
   "devDependencies": {
     "@faker-js/faker": "^10.0.0",
     "@repo/eslint-config": "workspace:*",
+    "@repo/prettier-config": "workspace:^",
     "@repo/typescript-config": "workspace:*",
     "dotenv-cli": "^10.0.0",
+    "eslint": "^9.34.0",
     "kysely": "^0.27.2",
+    "prettier": "^3.6.2",
     "typescript": "^5.9.2"
-  }
+  },
+  "prettier": "@repo/prettier-config"
 }

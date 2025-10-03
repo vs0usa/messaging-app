@@ -8,18 +8,9 @@ importers:
 
   .:
     devDependencies:
-      '@ianvs/prettier-plugin-sort-imports':
-        specifier: ^4.7.0
-        version: 4.7.0(prettier@3.6.2)
       knip:
         specifier: ^5.64.1
         version: 5.64.1(@types/node@22.18.8)(typescript@5.9.2)
-      prettier:
-        specifier: ^3.6.2
-        version: 3.6.2
-      prettier-plugin-tailwindcss:
-        specifier: ^0.6.14
-        version: 0.6.14(@ianvs/prettier-plugin-sort-imports@4.7.0(prettier@3.6.2))(prettier@3.6.2)
       sherif:
         specifier: ^1.6.1
         version: 1.6.1
@@ -105,6 +96,9 @@ importers:
       '@repo/eslint-config':
         specifier: workspace:*
         version: link:../../packages/eslint-config
+      '@repo/prettier-config':
+        specifier: workspace:^
+        version: link:../../packages/prettier-config
       '@repo/typescript-config':
         specifier: workspace:*
         version: link:../../packages/typescript-config
@@ -124,8 +118,11 @@ importers:
         specifier: ^10.0.0
         version: 10.0.0
       eslint:
-        specifier: ^9.34.0
+        specifier: ^9.36.0
         version: 9.36.0(jiti@2.6.0)
+      prettier:
+        specifier: ^3.6.2
+        version: 3.6.2
       typescript:
         specifier: ^5.9.2
         version: 5.9.2
@@ -154,15 +151,24 @@ importers:
       '@repo/eslint-config':
         specifier: workspace:*
         version: link:../eslint-config
+      '@repo/prettier-config':
+        specifier: workspace:^
+        version: link:../prettier-config
       '@repo/typescript-config':
         specifier: workspace:*
         version: link:../typescript-config
       dotenv-cli:
         specifier: ^10.0.0
         version: 10.0.0
+      eslint:
+        specifier: ^9.34.0
+        version: 9.36.0(jiti@2.6.0)
       kysely:
         specifier: ^0.27.2
         version: 0.27.6
+      prettier:
+        specifier: ^3.6.2
+        version: 3.6.2
       typescript:
         specifier: ^5.9.2
         version: 5.9.2
@@ -172,9 +178,18 @@ importers:
       '@repo/eslint-config':
         specifier: workspace:*
         version: link:../eslint-config
+      '@repo/prettier-config':
+        specifier: workspace:^
+        version: link:../prettier-config
       '@repo/typescript-config':
         specifier: workspace:*
         version: link:../typescript-config
+      eslint:
+        specifier: ^9.34.0
+        version: 9.36.0(jiti@2.6.0)
+      prettier:
+        specifier: ^3.6.2
+        version: 3.6.2
       typescript:
         specifier: ^5.9.2
         version: 5.9.2
@@ -197,6 +212,9 @@ importers:
       '@repo/eslint-config':
         specifier: workspace:*
         version: link:../eslint-config
+      '@repo/prettier-config':
+        specifier: workspace:^
+        version: link:../prettier-config
       '@repo/typescript-config':
         specifier: workspace:*
         version: link:../typescript-config
@@ -206,9 +224,15 @@ importers:
       dotenv-cli:
         specifier: ^10.0.0
         version: 10.0.0
+      eslint:
+        specifier: ^9.34.0
+        version: 9.36.0(jiti@2.6.0)
       kysely-ctl:
         specifier: ^0.19.0
         version: 0.19.0(kysely@0.27.6)(typescript@5.9.2)
+      prettier:
+        specifier: ^3.6.2
+        version: 3.6.2
       typescript:
         specifier: ^5.9.2
         version: 5.9.2
@@ -221,6 +245,9 @@ importers:
       '@next/eslint-plugin-next':
         specifier: ^15.5.0
         version: 15.5.4
+      '@repo/prettier-config':
+        specifier: workspace:^
+        version: link:../prettier-config
       eslint:
         specifier: ^9.34.0
         version: 9.36.0(jiti@2.6.0)
@@ -250,6 +277,27 @@ importers:
         version: 8.45.0(eslint@9.36.0(jiti@2.6.0))(typescript@5.9.2)
 
   packages/github-config: {}
+
+  packages/prettier-config:
+    devDependencies:
+      '@ianvs/prettier-plugin-sort-imports':
+        specifier: ^4.7.0
+        version: 4.7.0(prettier@3.6.2)
+      '@repo/typescript-config':
+        specifier: workspace:*
+        version: link:../typescript-config
+      '@types/node':
+        specifier: ^22.18.1
+        version: 22.18.8
+      prettier:
+        specifier: ^3.6.2
+        version: 3.6.2
+      prettier-plugin-tailwindcss:
+        specifier: ^0.6.14
+        version: 0.6.14(@ianvs/prettier-plugin-sort-imports@4.7.0(prettier@3.6.2))(prettier@3.6.2)
+      typescript:
+        specifier: ^5.9.2
+        version: 5.9.2
 
   packages/typescript-config: {}
 
@@ -310,6 +358,9 @@ importers:
       '@repo/eslint-config':
         specifier: workspace:*
         version: link:../eslint-config
+      '@repo/prettier-config':
+        specifier: workspace:^
+        version: link:../prettier-config
       '@repo/typescript-config':
         specifier: workspace:*
         version: link:../typescript-config
@@ -325,6 +376,9 @@ importers:
       eslint:
         specifier: ^9.34.0
         version: 9.36.0(jiti@2.6.0)
+      prettier:
+        specifier: ^3.6.2
+        version: 3.6.2
       typescript:
         specifier: ^5.9.2
         version: 5.9.2

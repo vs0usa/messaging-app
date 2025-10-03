@@ -10,6 +10,7 @@
   },
   "scripts": {
     "add:component": "pnpm dlx shadcn@latest add",
+    "format": "prettier --check . --ignore-path ../../.gitignore",
     "lint": "eslint . --max-warnings 0",
     "check-types": "tsc --noEmit"
   },
@@ -38,11 +39,14 @@
   },
   "devDependencies": {
     "@repo/eslint-config": "workspace:*",
+    "@repo/prettier-config": "workspace:^",
     "@repo/typescript-config": "workspace:*",
     "@types/node": "^22.15.3",
     "@types/react": "19.1.0",
     "@types/react-dom": "19.1.1",
     "eslint": "^9.34.0",
+    "prettier": "^3.6.2",
     "typescript": "^5.9.2"
-  }
+  },
+  "prettier": "@repo/prettier-config"
 }

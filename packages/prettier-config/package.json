@@ -1,22 +1,21 @@
 {
-  "name": "@repo/config",
+  "name": "@repo/prettier-config",
   "version": "0.0.0",
   "private": true,
   "type": "module",
   "exports": {
-    ".": "./src/index.ts"
+    ".": "./index.js"
   },
   "scripts": {
     "format": "prettier --check . --ignore-path ../../.gitignore",
-    "lint": "eslint .",
-    "check-types": "tsc --noEmit"
+    "typecheck": "tsc --noEmit"
   },
   "devDependencies": {
-    "@repo/eslint-config": "workspace:*",
-    "@repo/prettier-config": "workspace:^",
+    "@ianvs/prettier-plugin-sort-imports": "^4.7.0",
     "@repo/typescript-config": "workspace:*",
-    "eslint": "^9.34.0",
+    "@types/node": "^22.18.1",
     "prettier": "^3.6.2",
+    "prettier-plugin-tailwindcss": "^0.6.14",
     "typescript": "^5.9.2"
   },
   "prettier": "@repo/prettier-config"

@@ -8,9 +8,15 @@
     "./next-js": "./next.js",
     "./react-internal": "./react-internal.js"
   },
+  "scripts": {
+    "format": "prettier --check . --ignore-path ../../.gitignore",
+    "lint": "eslint .",
+    "check-types": "tsc --noEmit"
+  },
   "devDependencies": {
     "@eslint/js": "^9.34.0",
     "@next/eslint-plugin-next": "^15.5.0",
+    "@repo/prettier-config": "workspace:^",
     "eslint": "^9.34.0",
     "eslint-config-prettier": "^10.1.1",
     "eslint-plugin-only-warn": "^1.1.0",
@@ -20,5 +26,6 @@
     "globals": "^16.3.0",
     "typescript": "^5.9.2",
     "typescript-eslint": "^8.40.0"
-  }
+  },
+  "prettier": "@repo/prettier-config"
 }

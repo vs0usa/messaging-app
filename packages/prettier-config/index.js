@@ -1,0 +1,25 @@
+const config = {
+  semi: false,
+  plugins: [
+    "@ianvs/prettier-plugin-sort-imports",
+    "prettier-plugin-tailwindcss",
+  ],
+  importOrder: [
+    "<TYPES>",
+    "^(react/(.*)$)|^(react$)",
+    "^(next/(.*)$)|^(next$)",
+    "<THIRD_PARTY_MODULES>",
+    "<TYPES>^@repo",
+    "^@repo/(.*)$",
+    "<TYPES>^[.|..|@]",
+    "^@/",
+    "^[../]",
+    "^[./]",
+  ],
+  importOrderParserPlugins: ["typescript", "jsx", "decorators-legacy"],
+  importOrderTypeScriptVersion: "4.4.0",
+  tailwindStylesheet: "./apps/web/src/styles/globals.css",
+  tailwindFunctions: ["cn", "clsx", "cva", "tv"],
+}
+
+export default config

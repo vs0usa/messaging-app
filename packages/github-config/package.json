@@ -1,5 +1,5 @@
 {
-  "name": "@repo/github",
+  "name": "@repo/github-config",
   "version": "0.0.0",
   "private": true,
   "type": "module"
