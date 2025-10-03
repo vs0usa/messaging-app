@@ -10,6 +10,7 @@ type State = {
   contactsExpanded: boolean
   recipientId: string | null
   messages: Record<string, ChatMessage[]>
+  typingRecipients: string[]
 
   setWs: (ws: WebSocket | null) => void
   setContacts: (contacts: Pick<User, "id" | "name" | "image">[]) => void
@@ -19,6 +20,7 @@ type State = {
   closeChat: (userId: string) => void
   setMessages: (recipientId: string, messages: ChatMessage[]) => void
   addMessage: (recipientId: string, message: ChatMessage) => void
+  setTypingRecipient: (recipientId: string, isTyping: boolean) => void
 }
 
 export const useMessagesStore = create<State>(
@@ -30,6 +32,7 @@ export const useMessagesStore = create<State>(
       contactsExpanded: false,
       recipientId: null,
       messages: {},
+      typingRecipients: [],
       setWs: (ws: WebSocket | null) => set(() => ({ ws })),
       setContacts: (contacts: State["contacts"]) => set(() => ({ contacts })),
       setRecipientId: (userId: string | null) =>
@@ -54,6 +57,12 @@ export const useMessagesStore = create<State>(
             ...state.messages,
             [recipientId]: [...(state.messages[recipientId] ?? []), message],
           },
+        })),
+      setTypingRecipient: (recipientId: string, isTyping: boolean) =>
+        set((state) => ({
+          typingRecipients: isTyping
+            ? [...state.typingRecipients, recipientId]
+            : state.typingRecipients.filter((id) => id !== recipientId),
         })),
     }),
     { name: "messages", exclude: ["ws"] },

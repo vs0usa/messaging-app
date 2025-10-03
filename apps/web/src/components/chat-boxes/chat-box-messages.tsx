@@ -17,7 +17,7 @@ export const ChatBoxMessages = ({ id }: Props) => {
 
   if (!messages || !recipient || !user) {
     return (
-      <div className="max-h-[calc(100%-116px)] space-y-4 overflow-y-auto p-4">
+      <div className="h-[calc(100%-140px)] space-y-4 overflow-y-auto p-4">
         <Skeleton className="min-h-12 rounded" />
         <Skeleton className="min-h-12 rounded" />
         <Skeleton className="min-h-12 rounded" />
@@ -31,14 +31,14 @@ export const ChatBoxMessages = ({ id }: Props) => {
 
   if (messages.length === 0) {
     return (
-      <div className="max-h-[calc(100%-116px)] space-y-4 overflow-y-auto p-4">
+      <div className="h-[calc(100%-140px)] space-y-4 overflow-y-auto p-4">
         <p className="text-muted-foreground text-center">No messages yet</p>
       </div>
     )
   }
 
   return (
-    <div className="h-[calc(100%-116px)] space-y-4 overflow-y-auto p-4">
+    <div className="h-[calc(100%-140px)] space-y-4 overflow-y-auto p-4">
       {messages.map((m) => {
         const messageUser = m.senderId === id ? recipient : user
 

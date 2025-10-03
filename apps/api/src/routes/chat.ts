@@ -3,21 +3,31 @@ import { Hono } from "hono"
 import { authMiddleware } from "../middlewares/auth-middleware"
 import { formatWsMessage } from "../utils/format-ws-message"
 import { getMessages } from "../utils/get-messages"
-import { getInitialMessagesSchema, messageSchema } from "../utils/ws-schemas"
+import {
+  getInitialMessagesSchema,
+  messageSchema,
+  typingStartSchema,
+} from "../utils/ws-schemas"
+
+const sockets = new Map<string, WSContext[]>()
+const currentlyTyping = new Map<string, number>()
 
 export const app = new Hono().get("/", authMiddleware, async (c) => {
   const user = c.var.user
 
-  const handleOpen = (_: WSContext) => {
-    console.log("WebSocket opened from", user.id)
+  const handleOpen = (ws: WSContext) => {
+    sockets.set(user.id, [...(sockets.get(user.id) ?? []), ws])
+    console.log("✅ WebSocket opened from", user.id)
   }
 
-  const handleClose = (_: WSContext) => {
-    console.log("WebSocket closed from", user.id)
+  const handleClose = (ws: WSContext) => {
+    sockets.set(user.id, sockets.get(user.id)?.filter((s) => s !== ws) ?? [])
+    console.log("❌ WebSocket closed from", user.id)
   }
 
-  const handleError = (_: WSContext) => {
-    console.log("WebSocket error from", user.id)
+  const handleError = (ws: WSContext) => {
+    sockets.set(user.id, sockets.get(user.id)?.filter((s) => s !== ws) ?? [])
+    console.log("❌ WebSocket error from", user.id)
   }
 
   const handleMessage = async (event: MessageEvent, ws: WSContext) => {
@@ -34,7 +44,6 @@ export const app = new Hono().get("/", authMiddleware, async (c) => {
     }
 
     console.log("📩 WebSocket message received from", user.id)
-    console.log("Parsed message", parsedMessage.data)
 
     switch (parsedMessage.data.type) {
       case "get-initial-messages": {
@@ -58,6 +67,55 @@ export const app = new Hono().get("/", authMiddleware, async (c) => {
         const messages = await getMessages(user.id, recipientId)
 
         ws.send(formatWsMessage("initial-messages", { recipientId, messages }))
+
+        break
+      }
+
+      case "typing:start": {
+        const parsed = typingStartSchema.safeParse(data)
+
+        if (!parsed.success) {
+          console.error(
+            "❌ Invalid typing start message received from WebSocket client",
+            user.id,
+            parsedMessage.data.payload,
+          )
+          return
+        }
+
+        console.log(
+          "✅ Typing start message received from WebSocket client",
+          user.id,
+        )
+
+        const { recipientId } = parsed.data.payload
+        const recipientWs = sockets.get(recipientId)
+
+        if (!recipientWs) {
+          console.error(
+            "⚠️ Recipient WebSocket not found. Can't send typing start message to",
+            recipientId,
+          )
+          return
+        }
+
+        const oldTypingValue = currentlyTyping.get(recipientId) ?? 0
+        currentlyTyping.set(recipientId, oldTypingValue + 1)
+
+        recipientWs.forEach((_ws) => {
+          _ws.send(formatWsMessage("typing:start", { recipientId: user.id }))
+        })
+
+        setTimeout(() => {
+          const oldTypingValue = currentlyTyping.get(recipientId) ?? 0
+          currentlyTyping.set(recipientId, oldTypingValue - 1)
+
+          if (oldTypingValue - 1 === 0) {
+            recipientWs.forEach((_ws) => {
+              _ws.send(formatWsMessage("typing:stop", { recipientId: user.id }))
+            })
+          }
+        }, 3000)
 
         break
       }

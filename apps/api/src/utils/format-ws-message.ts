@@ -5,8 +5,8 @@ export type ChatMessage = Message & { attachments: Attachment[] }
 // Messages the server sends
 export type ServerWsMessage = {
   "initial-messages": { recipientId: string; messages: ChatMessage[] }
-  "typing:start": { userId: string }
-  "typing:stop": { userId: string }
+  "typing:start": { recipientId: string }
+  "typing:stop": { recipientId: string }
   "message:new": Message & { attachments: Attachment[] }
   "message:delete": { id: string }
   "message:read": { id: string }

@@ -19,12 +19,12 @@ export const getInitialMessagesSchema = z.object({
 
 export const typingStartSchema = z.object({
   type: z.literal("typing:start"),
-  payload: z.object({ userId: z.string() }),
+  payload: z.object({ recipientId: z.string() }),
 })
 
 export const typingStopSchema = z.object({
   type: z.literal("typing:stop"),
-  payload: z.object({ userId: z.string() }),
+  payload: z.object({ recipientId: z.string() }),
 })
 
 export const messageNewSchema = z.object({
