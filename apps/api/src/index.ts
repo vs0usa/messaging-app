@@ -23,7 +23,7 @@ app.use((c, next) => {
   return next()
 })
 
-app.use(cors())
+app.use(cors({ origin: config.web.baseUrl, credentials: true }))
 app.on(["GET", "POST"], "/auth/*", (c) => auth.handler(c.req.raw))
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -35,7 +35,7 @@ const routes = app
 app.onError((err, c) => {
   console.error(err)
 
-  return c.var.fail("internal_server_error")
+  return c.var.fail("SOMETHING_WENT_WRONG")
 })
 
 const server = serve({ fetch: app.fetch, port: config.api.port }, (info) => {
