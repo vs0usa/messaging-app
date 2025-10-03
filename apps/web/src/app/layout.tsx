@@ -4,9 +4,9 @@ import { cn } from "@repo/ui/lib/utils"
 import "./globals.css"
 import { ThemeProvider } from "next-themes"
 import { Toaster } from "@repo/ui/components/sonner"
+import type { LayoutProps } from "@/utils/types"
 import { AuthStoreProvider } from "@/stores/auth-store"
 import { getSession } from "@/utils/get-session"
-import type { LayoutProps } from "@/utils/types"
 import { Providers } from "./_components/providers"
 
 const inter = Inter({ subsets: ["latin"] })

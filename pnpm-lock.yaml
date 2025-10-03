@@ -161,7 +161,7 @@ importers:
         specifier: ^10.0.0
         version: 10.0.0
       eslint:
-        specifier: ^9.34.0
+        specifier: ^9.36.0
         version: 9.36.0(jiti@2.6.0)
       kysely:
         specifier: ^0.27.2
@@ -185,7 +185,7 @@ importers:
         specifier: workspace:*
         version: link:../typescript-config
       eslint:
-        specifier: ^9.34.0
+        specifier: ^9.36.0
         version: 9.36.0(jiti@2.6.0)
       prettier:
         specifier: ^3.6.2
@@ -225,7 +225,7 @@ importers:
         specifier: ^10.0.0
         version: 10.0.0
       eslint:
-        specifier: ^9.34.0
+        specifier: ^9.36.0
         version: 9.36.0(jiti@2.6.0)
       kysely-ctl:
         specifier: ^0.19.0
@@ -290,7 +290,7 @@ importers:
         specifier: workspace:*
         version: link:../typescript-config
       '@types/node':
-        specifier: ^22.18.1
+        specifier: ^22.15.3
         version: 22.18.8
       prettier:
         specifier: ^3.6.2
@@ -377,7 +377,7 @@ importers:
         specifier: 19.1.1
         version: 19.1.1(@types/react@19.1.0)
       eslint:
-        specifier: ^9.34.0
+        specifier: ^9.36.0
         version: 9.36.0(jiti@2.6.0)
       prettier:
         specifier: ^3.6.2
