@@ -1,3 +1,4 @@
+import { useEffect, useRef } from "react"
 import { Avatar } from "@repo/ui/components/avatar"
 import { Skeleton } from "@repo/ui/components/skeleton"
 import { useUser } from "@/stores/auth-store"
@@ -13,6 +14,15 @@ export const ChatBoxMessages = ({ id }: Props) => {
   const { contacts, messages: rawMessages } = useMessagesStore()
   const messages = rawMessages[id] ?? null
   const recipient = contacts.find((c) => c.id === id)
+  const messagesEndRef = useRef<HTMLDivElement>(null)
+
+  const scrollToBottom = () => {
+    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" })
+  }
+
+  useEffect(() => {
+    scrollToBottom()
+  }, [messages])
 
   if (!messages || !recipient || !user) {
     return (
@@ -35,8 +45,6 @@ export const ChatBoxMessages = ({ id }: Props) => {
       </div>
     )
   }
-
-  console.log("messages", messages)
 
   return (
     <div className="h-[calc(100%-140px)] space-y-4 overflow-y-auto p-4">
@@ -65,6 +73,7 @@ export const ChatBoxMessages = ({ id }: Props) => {
           </div>
         )
       })}
+      <div ref={messagesEndRef} />
     </div>
   )
 }
