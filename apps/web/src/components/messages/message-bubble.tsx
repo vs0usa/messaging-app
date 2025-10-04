@@ -1,5 +1,4 @@
-import type { ChatMessage } from "@repo/api"
-import type { User } from "@repo/auth/server"
+import type { ChatMessage, Contact } from "@repo/api"
 import { Avatar } from "@repo/ui/components/avatar"
 import { MessageDeleteButton } from "@/components/messages/messages-delete-button"
 import { useUser } from "@/stores/auth-store"

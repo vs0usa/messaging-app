@@ -35,8 +35,3 @@ export const messageDeleteSchema = z.object({
   type: z.literal("message:delete"),
   payload: z.object({ id: z.string() }),
 })
-
-export const messageReadSchema = z.object({
-  type: z.literal("message:read"),
-  payload: z.object({ id: z.string() }),
-})
