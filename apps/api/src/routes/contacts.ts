@@ -1,12 +1,13 @@
 import { Hono } from "hono"
 import { sql } from "kysely"
+import type { User } from "@repo/auth/server"
 import { authMiddleware } from "../middlewares/auth-middleware"
 
 export const app = new Hono().get(
   "/",
   authMiddleware,
   async ({ var: { user, db, send } }) => {
-    const conversations = await db
+    const conversations = (await db
       .selectFrom("messages as m")
       .innerJoin("users as u", (join) =>
         join.on(
@@ -36,7 +37,10 @@ export const app = new Hono().get(
         sql`greatest(m."senderId", m."recipientId")`,
         sql`m."createdAt" desc`,
       ])
-      .execute()
+      .execute()) as (Pick<User, "id" | "name" | "image"> & {
+      lastMessage: string
+      lastMessageAt: Date
+    })[]
 
     return send(conversations)
   },

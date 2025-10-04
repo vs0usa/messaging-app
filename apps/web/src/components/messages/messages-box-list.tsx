@@ -1,4 +1,4 @@
-import { useEffect } from "react"
+import { useEffect, useMemo } from "react"
 import { useQuery } from "@tanstack/react-query"
 import { Avatar } from "@repo/ui/components/avatar"
 import { Skeleton } from "@repo/ui/components/skeleton"
@@ -14,6 +14,15 @@ export const MessagesBoxList = () => {
     queryKey: ["get-contacts"],
     queryFn: call(apiClient.contacts.$get),
   })
+  const sortedUsers = useMemo(
+    () =>
+      users?.data.sort(
+        (a, b) =>
+          new Date(b.lastMessageAt).getTime() -
+          new Date(a.lastMessageAt).getTime(),
+      ),
+    [users],
+  )
 
   const getLatestMessage = (userId: string, defaultMessage: string) => {
     return messages[userId]?.at(-1)?.content ?? defaultMessage
@@ -28,17 +37,20 @@ export const MessagesBoxList = () => {
     }
   }, [setContacts, users])
 
+  if (isPending || !sortedUsers) {
+    return (
+      <div className="bg-popover flex h-full flex-col overflow-y-auto border-x border-t">
+        <Skeleton className="h-12 rounded" />
+        <Skeleton className="h-12 rounded" />
+        <Skeleton className="h-12 rounded" />
+        <Skeleton className="h-12 rounded" />
+      </div>
+    )
+  }
+
   return (
     <div className="bg-popover flex h-full flex-col overflow-y-auto border-x border-t">
-      {isPending && (
-        <>
-          <Skeleton className="h-12 rounded" />
-          <Skeleton className="h-12 rounded" />
-          <Skeleton className="h-12 rounded" />
-          <Skeleton className="h-12 rounded" />
-        </>
-      )}
-      {users?.data.map((u) => (
+      {sortedUsers.map((u) => (
         <button
           key={u.id}
           className="hover:bg-accent flex cursor-pointer items-center gap-2 p-2 text-start transition-colors"
