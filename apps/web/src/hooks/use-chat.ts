@@ -1,17 +1,30 @@
 import { useCallback, useEffect } from "react"
+import type { ClientWsMessage } from "@repo/api"
+import { useUser } from "@/stores/auth-store"
 import { useMessagesStore } from "@/stores/messages-store"
-import { apiClient } from "@/utils/call"
+import { getSocket } from "@/utils/ws-client"
 import {
-  formatWsMessage,
   initialMessagesSchema,
-  messageSchema,
+  messageNewSchema,
   typingStartSchema,
   typingStopSchema,
+  wsMessageSchema,
 } from "@/utils/ws-utils"
 
 export const useChat = () => {
-  const { ws, setWs, setMessages, setTypingRecipient } = useMessagesStore()
-  // const wsRef = useRef<WebSocket | null>(null)
+  const { setMessages, setTypingRecipient, addMessage } = useMessagesStore()
+  const user = useUser()
+
+  const send = useCallback(
+    <TType extends keyof ClientWsMessage>(
+      type: TType,
+      data: ClientWsMessage[TType],
+    ) => {
+      const socket = getSocket()
+      socket.send(JSON.stringify({ type, payload: data }))
+    },
+    [],
+  )
 
   /**
    * Utility functions to send messages to the WebSocket server
@@ -19,25 +32,27 @@ export const useChat = () => {
   const askMessages = useCallback(
     (withRecipientId: string) => {
       console.log("Asking messages for", withRecipientId)
-      console.log("WebSocket", ws)
-
-      ws?.send(
-        formatWsMessage("get-initial-messages", {
-          recipientId: withRecipientId,
-        }),
-      )
+      send("get-initial-messages", { recipientId: withRecipientId })
     },
-    [ws],
+    [send],
   )
   const sendTypingStart = useCallback(
     (withRecipientId: string) => {
       console.log("Sending typing start for", withRecipientId)
-
-      ws?.send(
-        formatWsMessage("typing:start", { recipientId: withRecipientId }),
-      )
+      send("typing:start", { recipientId: withRecipientId })
     },
-    [ws],
+    [send],
+  )
+  const sendMessage = useCallback(
+    (withRecipientId: string, content: string) => {
+      console.log("Sending message for", withRecipientId)
+      send("message:new", {
+        recipientId: withRecipientId,
+        content,
+        fileUrl: null,
+      })
+    },
+    [send],
   )
 
   /**
@@ -104,6 +119,30 @@ export const useChat = () => {
     },
     [setTypingRecipient],
   )
+  const handleMessageNew = useCallback(
+    (data: unknown) => {
+      const parsed = messageNewSchema.safeParse(data)
+
+      if (!user) return
+      if (!parsed.success) {
+        console.error(
+          "❌ Invalid message new message received from WebSocket server",
+          data,
+          parsed.error.issues,
+        )
+        return
+      }
+
+      console.log("✅ Message new message received from WebSocket server")
+
+      const { message } = parsed.data.payload
+      addMessage(
+        message.senderId === user.id ? message.recipientId : message.senderId,
+        message,
+      )
+    },
+    [addMessage, user],
+  )
 
   /**
    * WebSocket event handlers
@@ -114,7 +153,7 @@ export const useChat = () => {
   const handleMessage = useCallback(
     (event: MessageEvent) => {
       const data: unknown = JSON.parse(String(event.data))
-      const parsedMessage = messageSchema.safeParse(data)
+      const parsedMessage = wsMessageSchema.safeParse(data)
 
       if (!parsedMessage.success) {
         console.error(
@@ -131,9 +170,18 @@ export const useChat = () => {
           return handleTypingStart(data)
         case "typing:stop":
           return handleTypingStop(data)
+        case "message:new":
+          return handleMessageNew(data)
       }
+
+      return false
     },
-    [handleInitialMessages, handleTypingStart, handleTypingStop],
+    [
+      handleInitialMessages,
+      handleTypingStart,
+      handleTypingStop,
+      handleMessageNew,
+    ],
   )
   const handleClose = useCallback(() => {
     console.log("❌ WebSocket closed")
@@ -143,19 +191,13 @@ export const useChat = () => {
   }, [])
 
   useEffect(() => {
-    const newWs = apiClient.chat.$ws()
+    const socket = getSocket()
 
-    newWs.onopen = handleOpen
-    newWs.onmessage = handleMessage
-    newWs.onclose = handleClose
-    newWs.onerror = handleError
-    setWs(newWs)
+    socket.onopen = handleOpen
+    socket.onmessage = handleMessage
+    socket.onclose = handleClose
+    socket.onerror = handleError
+  }, [handleClose, handleError, handleMessage, handleOpen])
 
-    return () => {
-      newWs.close()
-      setWs(null)
-    }
-  }, [handleClose, handleError, handleMessage, handleOpen, setWs])
-
-  return { askMessages, sendTypingStart }
+  return { askMessages, sendTypingStart, sendMessage }
 }

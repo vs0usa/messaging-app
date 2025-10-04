@@ -1,4 +1,3 @@
-import { useMemo } from "react"
 import { Avatar } from "@repo/ui/components/avatar"
 import { Skeleton } from "@repo/ui/components/skeleton"
 import { useUser } from "@/stores/auth-store"
@@ -12,7 +11,7 @@ type Props = {
 export const ChatBoxMessages = ({ id }: Props) => {
   const user = useUser()
   const { contacts, messages: rawMessages } = useMessagesStore()
-  const messages = useMemo(() => rawMessages[id] ?? null, [rawMessages, id])
+  const messages = rawMessages[id] ?? null
   const recipient = contacts.find((c) => c.id === id)
 
   if (!messages || !recipient || !user) {
@@ -36,6 +35,8 @@ export const ChatBoxMessages = ({ id }: Props) => {
       </div>
     )
   }
+
+  console.log("messages", messages)
 
   return (
     <div className="h-[calc(100%-140px)] space-y-4 overflow-y-auto p-4">

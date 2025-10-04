@@ -1,6 +1,6 @@
 import { z } from "zod/v4"
 
-export const messageSchema = z.object({
+export const wsMessageSchema = z.object({
   type: z.enum([
     "get-initial-messages",
     "typing:start",

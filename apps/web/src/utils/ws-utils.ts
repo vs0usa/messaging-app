@@ -1,7 +1,6 @@
 import { z } from "zod/v4"
-import type { ClientWsMessage } from "@repo/api"
 
-export const messageSchema = z.object({
+export const wsMessageSchema = z.object({
   type: z.enum([
     "initial-messages",
     "typing:start",
@@ -13,34 +12,34 @@ export const messageSchema = z.object({
   payload: z.object(),
 })
 
+const messageSchema = z.object({
+  id: z.uuid(),
+  createdAt: z.coerce.date(),
+  updatedAt: z.coerce.date(),
+  editedAt: z.coerce.date().nullable(),
+  readAt: z.coerce.date().nullable(),
+  content: z.string(),
+  isEdited: z.boolean(),
+  senderId: z.uuid(),
+  recipientId: z.uuid(),
+  attachments: z
+    .object({
+      id: z.uuid(),
+      createdAt: z.coerce.date(),
+      fileName: z.string(),
+      fileUrl: z.string(),
+      fileSize: z.number(),
+      mimeType: z.string(),
+      messageId: z.uuid(),
+    })
+    .array(),
+})
+
 export const initialMessagesSchema = z.object({
   type: z.literal("initial-messages"),
   payload: z.object({
     recipientId: z.uuid(),
-    messages: z
-      .object({
-        id: z.uuid(),
-        createdAt: z.coerce.date(),
-        updatedAt: z.coerce.date(),
-        editedAt: z.coerce.date().nullable(),
-        readAt: z.coerce.date().nullable(),
-        content: z.string(),
-        isEdited: z.boolean(),
-        senderId: z.uuid(),
-        recipientId: z.uuid(),
-        attachments: z
-          .object({
-            id: z.uuid(),
-            createdAt: z.coerce.date(),
-            fileName: z.string(),
-            fileUrl: z.string(),
-            fileSize: z.number(),
-            mimeType: z.string(),
-            messageId: z.uuid(),
-          })
-          .array(),
-      })
-      .array(),
+    messages: messageSchema.array(),
   }),
 })
 
@@ -56,11 +55,7 @@ export const typingStopSchema = z.object({
 
 export const messageNewSchema = z.object({
   type: z.literal("message:new"),
-  payload: z.object({
-    recipientId: z.uuid(),
-    content: z.string(),
-    fileUrl: z.string().nullable(),
-  }),
+  payload: z.object({ message: messageSchema }),
 })
 
 export const messageDeleteSchema = z.object({
@@ -72,8 +67,3 @@ export const messageReadSchema = z.object({
   type: z.literal("message:read"),
   payload: z.object({ id: z.uuid() }),
 })
-
-export const formatWsMessage = <TType extends keyof ClientWsMessage>(
-  type: TType,
-  data: ClientWsMessage[TType],
-) => JSON.stringify({ type, payload: data })

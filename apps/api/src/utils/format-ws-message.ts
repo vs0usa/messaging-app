@@ -7,7 +7,7 @@ export type ServerWsMessage = {
   "initial-messages": { recipientId: string; messages: ChatMessage[] }
   "typing:start": { recipientId: string }
   "typing:stop": { recipientId: string }
-  "message:new": Message & { attachments: Attachment[] }
+  "message:new": { message: ChatMessage }
   "message:delete": { id: string }
   "message:read": { id: string }
 }
@@ -21,7 +21,6 @@ export const formatWsMessage = <TType extends keyof ServerWsMessage>(
 export type ClientWsMessage = {
   "get-initial-messages": { recipientId: string }
   "typing:start": { recipientId: string }
-  "typing:stop": { recipientId: string }
   "message:new": {
     recipientId: string
     content: string

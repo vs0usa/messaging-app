@@ -4,7 +4,6 @@ import type { ChatMessage } from "@repo/api"
 import type { User } from "@repo/auth/server"
 
 type State = {
-  ws: WebSocket | null
   contacts: Pick<User, "id" | "name" | "image">[]
   openChats: string[] // User IDs
   contactsExpanded: boolean
@@ -12,7 +11,6 @@ type State = {
   messages: Record<string, ChatMessage[]>
   typingRecipients: string[]
 
-  setWs: (ws: WebSocket | null) => void
   setContacts: (contacts: Pick<User, "id" | "name" | "image">[]) => void
   setRecipientId: (userId: string | null) => void
   toggleContacts: () => void
@@ -26,14 +24,12 @@ type State = {
 export const useMessagesStore = create<State>(
   syncTabs(
     (set) => ({
-      ws: null,
       contacts: [],
       openChats: [],
       contactsExpanded: false,
       recipientId: null,
       messages: {},
       typingRecipients: [],
-      setWs: (ws: WebSocket | null) => set(() => ({ ws })),
       setContacts: (contacts: State["contacts"]) => set(() => ({ contacts })),
       setRecipientId: (userId: string | null) =>
         set(() => ({ recipientId: userId })),
@@ -65,6 +61,6 @@ export const useMessagesStore = create<State>(
             : state.typingRecipients.filter((id) => id !== recipientId),
         })),
     }),
-    { name: "messages", exclude: ["ws"] },
+    { name: "messages" },
   ),
 )

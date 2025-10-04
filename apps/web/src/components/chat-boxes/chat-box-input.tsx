@@ -1,8 +1,21 @@
+import { zodResolver } from "@hookform/resolvers/zod"
+import { useForm } from "react-hook-form"
 import { useDebounceCallback } from "usehooks-ts"
-import { Button } from "@repo/ui/components/button"
+import { z } from "zod/v4"
+import {
+  Form,
+  FormButton,
+  FormControl,
+  FormField,
+  FormItem,
+} from "@repo/ui/components/form"
 import { Input } from "@repo/ui/components/input"
 import { useChat } from "@/hooks/use-chat"
 import { useMessagesStore } from "@/stores/messages-store"
+
+const schema = z.object({
+  content: z.string().min(1),
+})
 
 type Props = {
   id: string
@@ -10,15 +23,23 @@ type Props = {
 
 export const ChatBoxInput = ({ id }: Props) => {
   const { typingRecipients } = useMessagesStore()
-  const { sendTypingStart } = useChat()
+  const { sendTypingStart, sendMessage } = useChat()
   const isTyping = typingRecipients.includes(id)
   const debounced = useDebounceCallback(sendTypingStart, 1000, {
     maxWait: 2000,
   })
+  const form = useForm<z.infer<typeof schema>>({
+    resolver: zodResolver(schema),
+    defaultValues: { content: "" },
+  })
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleChange = () => {
     debounced(id)
-    console.log("Changed input to", e.target.value)
+  }
+
+  const handleSubmit = (values: z.infer<typeof schema>) => {
+    sendMessage(id, values.content)
+    form.reset()
   }
 
   return (
@@ -29,10 +50,31 @@ export const ChatBoxInput = ({ id }: Props) => {
       >
         Recipient is typing...
       </p>
-      <div className="flex gap-4">
-        <Input placeholder="Type a message" onChange={handleChange} />
-        <Button variant="outline">Send</Button>
-      </div>
+      <Form {...form}>
+        <form className="flex gap-4" onSubmit={form.handleSubmit(handleSubmit)}>
+          <FormField
+            control={form.control}
+            name="content"
+            render={({ field }) => (
+              <FormItem className="flex w-full">
+                <FormControl>
+                  <Input
+                    placeholder="Type a message"
+                    {...field}
+                    onChange={(e) => {
+                      handleChange()
+                      field.onChange(e)
+                    }}
+                  />
+                </FormControl>
+              </FormItem>
+            )}
+          />
+          <FormButton className="w-fit" variant="outline">
+            Send
+          </FormButton>
+        </form>
+      </Form>
     </div>
   )
 }

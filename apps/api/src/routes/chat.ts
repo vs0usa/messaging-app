@@ -1,12 +1,14 @@
 import type { WSContext } from "hono/ws"
 import { Hono } from "hono"
 import { authMiddleware } from "../middlewares/auth-middleware"
+import { createMessage } from "../utils/create-message"
 import { formatWsMessage } from "../utils/format-ws-message"
 import { getMessages } from "../utils/get-messages"
 import {
   getInitialMessagesSchema,
-  messageSchema,
+  messageNewSchema,
   typingStartSchema,
+  wsMessageSchema,
 } from "../utils/ws-schemas"
 
 const sockets = new Map<string, WSContext[]>()
@@ -32,7 +34,7 @@ export const app = new Hono().get("/", authMiddleware, async (c) => {
 
   const handleMessage = async (event: MessageEvent, ws: WSContext) => {
     const data: unknown = JSON.parse(String(event.data))
-    const parsedMessage = messageSchema.safeParse(data)
+    const parsedMessage = wsMessageSchema.safeParse(data)
 
     if (!parsedMessage.success) {
       console.error(
@@ -90,6 +92,7 @@ export const app = new Hono().get("/", authMiddleware, async (c) => {
 
         const { recipientId } = parsed.data.payload
         const recipientWs = sockets.get(recipientId)
+        const oldTypingValue = currentlyTyping.get(recipientId) ?? 0
 
         if (!recipientWs) {
           console.error(
@@ -99,9 +102,7 @@ export const app = new Hono().get("/", authMiddleware, async (c) => {
           return
         }
 
-        const oldTypingValue = currentlyTyping.get(recipientId) ?? 0
         currentlyTyping.set(recipientId, oldTypingValue + 1)
-
         recipientWs.forEach((_ws) => {
           _ws.send(formatWsMessage("typing:start", { recipientId: user.id }))
         })
@@ -116,6 +117,56 @@ export const app = new Hono().get("/", authMiddleware, async (c) => {
             })
           }
         }, 3000)
+
+        break
+      }
+
+      case "message:new": {
+        const parsed = messageNewSchema.safeParse(data)
+
+        if (!parsed.success) {
+          console.error(
+            "❌ Invalid message new message received from WebSocket client",
+            user.id,
+            parsedMessage.data.payload,
+          )
+          return
+        }
+
+        const { recipientId, content, fileUrl } = parsed.data.payload
+        const rawMessage = await createMessage(
+          user.id,
+          recipientId,
+          content,
+          fileUrl,
+        )
+
+        if (!rawMessage) {
+          console.error(
+            "❌ Failed to create message",
+            user.id,
+            recipientId,
+            content,
+            fileUrl,
+          )
+          return
+        }
+
+        const message = { ...rawMessage, attachments: [] }
+        const recipientWs = sockets.get(recipientId)
+
+        if (!recipientWs) {
+          console.error(
+            "⚠️ Recipient WebSocket not found. Can't send message new message to",
+            recipientId,
+          )
+          return
+        }
+
+        ws.send(formatWsMessage("message:new", { message }))
+        recipientWs.forEach((_ws) => {
+          _ws.send(formatWsMessage("message:new", { message }))
+        })
 
         break
       }
