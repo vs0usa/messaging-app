@@ -1,6 +1,7 @@
 import { useEffect, useRef } from "react"
 import { Avatar } from "@repo/ui/components/avatar"
 import { Skeleton } from "@repo/ui/components/skeleton"
+import { ChatMessageDelete } from "@/components/chat-boxes/chat-message-delete"
 import { useUser } from "@/stores/auth-store"
 import { useMessagesStore } from "@/stores/messages-store"
 import { formatMessageDate } from "@/utils/date-format"
@@ -47,12 +48,15 @@ export const ChatBoxMessages = ({ id }: Props) => {
   }
 
   return (
-    <div className="h-[calc(100%-140px)] space-y-4 overflow-y-auto p-4">
+    <div className="flex h-[calc(100%-140px)] flex-col gap-2 overflow-y-auto">
       {messages.map((m) => {
         const messageUser = m.senderId === id ? recipient : user
 
         return (
-          <div key={m.id} className="flex items-center gap-2">
+          <div
+            key={m.id}
+            className="hover:bg-accent group/message relative flex items-center gap-2 px-4 py-1 transition-colors"
+          >
             <Avatar
               src={messageUser.image}
               className="max-size-10 place-self-start self-start"
@@ -70,6 +74,7 @@ export const ChatBoxMessages = ({ id }: Props) => {
               </div>
               <p className="text-foreground/80 text-sm">{m.content}</p>
             </div>
+            {messageUser.id === user.id && <ChatMessageDelete id={m.id} />}
           </div>
         )
       })}

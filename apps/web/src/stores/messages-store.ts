@@ -18,6 +18,7 @@ type State = {
   closeChat: (userId: string) => void
   setMessages: (recipientId: string, messages: ChatMessage[]) => void
   addMessage: (recipientId: string, message: ChatMessage) => void
+  delMessage: (id: string) => void
   setTypingRecipient: (recipientId: string, isTyping: boolean) => void
 }
 
@@ -54,6 +55,23 @@ export const useMessagesStore = create<State>(
             [recipientId]: [...(state.messages[recipientId] ?? []), message],
           },
         })),
+      delMessage: (id: string) =>
+        set((state) => {
+          const recipientId = Object.keys(state.messages).find((key) =>
+            (state.messages[key] ?? []).some((m) => m.id === id),
+          )
+
+          if (!recipientId) return state
+
+          return {
+            messages: {
+              ...state.messages,
+              [recipientId]: (state.messages[recipientId] ?? []).filter(
+                (m) => m.id !== id,
+              ),
+            },
+          }
+        }),
       setTypingRecipient: (recipientId: string, isTyping: boolean) =>
         set((state) => ({
           typingRecipients: isTyping

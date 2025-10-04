@@ -5,6 +5,7 @@ import { useMessagesStore } from "@/stores/messages-store"
 import { getSocket } from "@/utils/ws-client"
 import {
   initialMessagesSchema,
+  messageDeleteSchema,
   messageNewSchema,
   typingStartSchema,
   typingStopSchema,
@@ -12,7 +13,8 @@ import {
 } from "@/utils/ws-utils"
 
 export const useChat = () => {
-  const { setMessages, setTypingRecipient, addMessage } = useMessagesStore()
+  const { setMessages, setTypingRecipient, addMessage, delMessage } =
+    useMessagesStore()
   const user = useUser()
 
   const send = useCallback(
@@ -51,6 +53,13 @@ export const useChat = () => {
         content,
         fileUrl: null,
       })
+    },
+    [send],
+  )
+  const deleteMessage = useCallback(
+    (id: string) => {
+      console.log("Deleting message for", id)
+      send("message:delete", { id })
     },
     [send],
   )
@@ -143,6 +152,26 @@ export const useChat = () => {
     },
     [addMessage, user],
   )
+  const handleMessageDelete = useCallback(
+    (data: unknown) => {
+      const parsed = messageDeleteSchema.safeParse(data)
+
+      if (!parsed.success) {
+        console.error(
+          "❌ Invalid message delete message received from WebSocket server",
+          data,
+          parsed.error.issues,
+        )
+        return
+      }
+
+      console.log("✅ Message delete message received from WebSocket server")
+
+      const { id } = parsed.data.payload
+      delMessage(id)
+    },
+    [delMessage],
+  )
 
   /**
    * WebSocket event handlers
@@ -172,6 +201,8 @@ export const useChat = () => {
           return handleTypingStop(data)
         case "message:new":
           return handleMessageNew(data)
+        case "message:delete":
+          return handleMessageDelete(data)
       }
 
       return false
@@ -181,6 +212,7 @@ export const useChat = () => {
       handleTypingStart,
       handleTypingStop,
       handleMessageNew,
+      handleMessageDelete,
     ],
   )
   const handleClose = useCallback(() => {
@@ -199,5 +231,5 @@ export const useChat = () => {
     socket.onerror = handleError
   }, [handleClose, handleError, handleMessage, handleOpen])
 
-  return { askMessages, sendTypingStart, sendMessage }
+  return { askMessages, sendTypingStart, sendMessage, deleteMessage }
 }

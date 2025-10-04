@@ -1,11 +1,12 @@
 import type { WSContext } from "hono/ws"
 import { Hono } from "hono"
+import type { ServerWsMessage } from "../utils/format-ws-message"
 import { authMiddleware } from "../middlewares/auth-middleware"
 import { createMessage } from "../utils/create-message"
-import { formatWsMessage } from "../utils/format-ws-message"
 import { getMessages } from "../utils/get-messages"
 import {
   getInitialMessagesSchema,
+  messageDeleteSchema,
   messageNewSchema,
   typingStartSchema,
   wsMessageSchema,
@@ -47,6 +48,12 @@ export const app = new Hono().get("/", authMiddleware, async (c) => {
 
     console.log("📩 WebSocket message received from", user.id)
 
+    const send = <TType extends keyof ServerWsMessage>(
+      type: TType,
+      data: ServerWsMessage[TType],
+      _ws: WSContext = ws,
+    ) => _ws.send(JSON.stringify({ type, payload: data }))
+
     switch (parsedMessage.data.type) {
       case "get-initial-messages": {
         const parsed = getInitialMessagesSchema.safeParse(data)
@@ -68,7 +75,7 @@ export const app = new Hono().get("/", authMiddleware, async (c) => {
         const { recipientId } = parsed.data.payload
         const messages = await getMessages(user.id, recipientId)
 
-        ws.send(formatWsMessage("initial-messages", { recipientId, messages }))
+        send("initial-messages", { recipientId, messages })
 
         break
       }
@@ -104,7 +111,7 @@ export const app = new Hono().get("/", authMiddleware, async (c) => {
 
         currentlyTyping.set(recipientId, oldTypingValue + 1)
         recipientWs.forEach((_ws) => {
-          _ws.send(formatWsMessage("typing:start", { recipientId: user.id }))
+          send("typing:start", { recipientId: user.id }, _ws)
         })
 
         setTimeout(() => {
@@ -113,7 +120,7 @@ export const app = new Hono().get("/", authMiddleware, async (c) => {
 
           if (oldTypingValue - 1 === 0) {
             recipientWs.forEach((_ws) => {
-              _ws.send(formatWsMessage("typing:stop", { recipientId: user.id }))
+              send("typing:stop", { recipientId: user.id }, _ws)
             })
           }
         }, 3000)
@@ -163,10 +170,53 @@ export const app = new Hono().get("/", authMiddleware, async (c) => {
           return
         }
 
-        ws.send(formatWsMessage("message:new", { message }))
+        send("message:new", { message })
         recipientWs.forEach((_ws) => {
-          _ws.send(formatWsMessage("message:new", { message }))
-          _ws.send(formatWsMessage("typing:stop", { recipientId: user.id }))
+          send("message:new", { message }, _ws)
+          send("typing:stop", { recipientId: user.id }, _ws)
+        })
+
+        break
+      }
+
+      case "message:delete": {
+        const parsed = messageDeleteSchema.safeParse(data)
+
+        if (!parsed.success) {
+          console.error(
+            "❌ Invalid message delete message received from WebSocket client",
+            user.id,
+            parsedMessage.data.payload,
+          )
+          return
+        }
+
+        const { id } = parsed.data.payload
+        const message = await c.var.db
+          .selectFrom("messages")
+          .where("id", "=", id)
+          .selectAll()
+          .executeTakeFirst()
+
+        if (!message || message.senderId !== user.id) {
+          return
+        }
+
+        const recipientWs = sockets.get(message.recipientId)
+
+        if (!recipientWs) {
+          console.error(
+            "⚠️ Recipient WebSocket not found. Can't send message delete message to",
+            message.recipientId,
+          )
+          return
+        }
+
+        await c.var.db.deleteFrom("messages").where("id", "=", id).execute()
+
+        send("message:delete", { id })
+        recipientWs.forEach((_ws) => {
+          send("message:delete", { id }, _ws)
         })
 
         break

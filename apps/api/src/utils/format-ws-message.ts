@@ -12,11 +12,6 @@ export type ServerWsMessage = {
   "message:read": { id: string }
 }
 
-export const formatWsMessage = <TType extends keyof ServerWsMessage>(
-  type: TType,
-  data: ServerWsMessage[TType],
-) => JSON.stringify({ type, payload: data })
-
 // Messages the client sends
 export type ClientWsMessage = {
   "get-initial-messages": { recipientId: string }
