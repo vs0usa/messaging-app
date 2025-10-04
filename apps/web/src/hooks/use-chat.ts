@@ -10,7 +10,7 @@ import {
   typingStartSchema,
   typingStopSchema,
   wsMessageSchema,
-} from "@/utils/ws-utils"
+} from "@/utils/ws-schemas"
 
 export const useChat = () => {
   const { setMessages, setTypingRecipient, addMessage, delMessage } =

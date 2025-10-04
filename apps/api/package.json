@@ -11,6 +11,8 @@
     "build": "pnpm with-env tsc --outDir dist",
     "start": "pnpm with-env node dist/index.js",
     "with-env": "dotenv -e ../../.env --",
+    "test": "vitest",
+    "test:coverage": "vitest run --coverage",
     "format": "prettier --check . --ignore-path ../../.gitignore",
     "lint": "eslint .",
     "check-types": "tsc --noEmit"
@@ -29,12 +31,14 @@
     "@repo/prettier-config": "workspace:^",
     "@repo/typescript-config": "workspace:^",
     "@types/node": "^22.15.3",
+    "@vitest/coverage-v8": "^2.1.8",
     "dotenv-cli": "^10.0.0",
     "eslint": "^9.36.0",
     "prettier": "^3.6.2",
     "tsx": "^4.7.1",
     "typescript": "^5.9.2",
-    "typescript-eslint": "^8.42.0"
+    "typescript-eslint": "^8.42.0",
+    "vitest": "^2.1.8"
   },
   "prettier": "@repo/prettier-config"
 }

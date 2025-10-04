@@ -1,6 +1,6 @@
 import type { WSContext } from "hono/ws"
 import { Hono } from "hono"
-import type { ServerWsMessage } from "../utils/format-ws-message"
+import type { ServerWsMessage } from "../utils/ws-utils"
 import { authMiddleware } from "../middlewares/auth-middleware"
 import { createMessage } from "../utils/create-message"
 import { getMessages } from "../utils/get-messages"
