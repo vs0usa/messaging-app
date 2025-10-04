@@ -1,5 +1,5 @@
 import type { LayoutProps } from "@/utils/types"
-import { MessagesContainer } from "@/components/messages/messages-container"
+import { ContactsContainer } from "@/components/contacts/contacts-container"
 import { Navbar } from "./_components/navbar/navbar"
 
 export default function Layout({ children }: LayoutProps) {
@@ -7,7 +7,7 @@ export default function Layout({ children }: LayoutProps) {
     <>
       <Navbar />
       {children}
-      <MessagesContainer />
+      <ContactsContainer />
     </>
   )
 }

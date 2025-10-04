@@ -3,11 +3,11 @@
 import { motion } from "framer-motion"
 import { ChevronUpIcon } from "lucide-react"
 import { Avatar } from "@repo/ui/components/avatar"
-import { MessagesBoxList } from "@/components/messages/messages-box-list"
+import { ContactsBoxList } from "@/components/contacts/contacts-box-list"
 import { useUser } from "@/stores/auth-store"
 import { useMessagesStore } from "@/stores/messages-store"
 
-export const MessagesBox = () => {
+export const ContactsBox = () => {
   const user = useUser()
   const { contactsExpanded, toggleContacts } = useMessagesStore()
 
@@ -24,7 +24,7 @@ export const MessagesBox = () => {
         className="relative flex cursor-pointer select-none items-center"
         onClick={toggleContacts}
       >
-        <div className="bg-popover hover:bg-accent flex h-12 w-full items-center gap-2 rounded-t-md border border-b-0 px-2 transition-colors">
+        <div className="bg-card hover:bg-accent flex h-12 w-full items-center gap-2 rounded-t-md border border-b-0 px-2 transition-colors">
           <Avatar
             className="max-size-8"
             src={user.image}
@@ -47,7 +47,7 @@ export const MessagesBox = () => {
           </button>
         </div>
       </div>
-      <MessagesBoxList />
+      <ContactsBoxList />
     </motion.div>
   )
 }

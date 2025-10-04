@@ -7,7 +7,7 @@ import { useMessagesStore } from "@/stores/messages-store"
 import { apiClient, call } from "@/utils/call"
 import { formatMessageDate } from "@/utils/date-format"
 
-export const MessagesBoxList = () => {
+export const ContactsBoxList = () => {
   const { setContacts, openChat, setRecipientId, messages } = useMessagesStore()
   const { askMessages } = useChat()
   const { data: users, isPending } = useQuery({
@@ -39,7 +39,7 @@ export const MessagesBoxList = () => {
 
   if (isPending || !sortedUsers) {
     return (
-      <div className="bg-popover flex h-full flex-col overflow-y-auto border-x border-t">
+      <div className="bg-card flex h-full flex-col overflow-y-auto border-x border-t">
         <Skeleton className="h-12 rounded" />
         <Skeleton className="h-12 rounded" />
         <Skeleton className="h-12 rounded" />
@@ -49,7 +49,7 @@ export const MessagesBoxList = () => {
   }
 
   return (
-    <div className="bg-popover flex h-full flex-col overflow-y-auto border-x border-t">
+    <div className="bg-card flex h-full flex-col overflow-y-auto border-x border-t">
       {sortedUsers.map((u) => (
         <button
           key={u.id}

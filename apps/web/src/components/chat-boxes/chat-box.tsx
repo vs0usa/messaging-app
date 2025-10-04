@@ -35,7 +35,7 @@ export const ChatBox = ({ userId, index }: Props) => {
         className="relative flex cursor-pointer select-none items-center"
         onClick={() => setRecipientId(recipientId === userId ? null : userId)}
       >
-        <div className="bg-popover hover:bg-accent relative flex h-12 w-full items-center gap-2 rounded-t-md border border-b-0 px-2 pr-12 transition-colors">
+        <div className="bg-card hover:bg-accent relative flex h-12 w-full items-center gap-2 rounded-t-md border border-b-0 px-2 pr-12 transition-colors">
           <Avatar
             className="max-size-8"
             src={user.image}
@@ -57,7 +57,7 @@ export const ChatBox = ({ userId, index }: Props) => {
           </button>
         </div>
       </div>
-      <div className="bg-popover flex h-full flex-col border-x border-t">
+      <div className="bg-card flex h-full flex-col border-x border-t">
         <ChatBoxMessages id={userId} />
         <ChatBoxInput id={userId} />
       </div>
