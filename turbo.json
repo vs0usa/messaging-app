@@ -13,6 +13,10 @@
       "dependsOn": ["^build"],
       "outputs": [".cache/tsbuildinfo.json", "dist/**"]
     },
+    "test:run": {
+      "dependsOn": ["^topo"],
+      "outputs": ["coverage/**"]
+    },
     "format": {
       "outputs": [".cache/.prettiercache"],
       "outputLogs": "new-only"

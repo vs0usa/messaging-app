@@ -12,6 +12,7 @@
     "start": "pnpm with-env node dist/index.js",
     "with-env": "dotenv -e ../../.env --",
     "test": "vitest",
+    "test:run": "vitest run",
     "test:coverage": "vitest run --coverage",
     "format": "prettier --check . --ignore-path ../../.gitignore",
     "lint": "eslint .",
