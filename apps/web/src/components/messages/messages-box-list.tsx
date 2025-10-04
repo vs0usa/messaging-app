@@ -8,12 +8,16 @@ import { apiClient, call } from "@/utils/call"
 import { formatMessageDate } from "@/utils/date-format"
 
 export const MessagesBoxList = () => {
-  const { setContacts, openChat, setRecipientId } = useMessagesStore()
+  const { setContacts, openChat, setRecipientId, messages } = useMessagesStore()
   const { askMessages } = useChat()
   const { data: users, isPending } = useQuery({
     queryKey: ["get-contacts"],
     queryFn: call(apiClient.contacts.$get),
   })
+
+  const getLatestMessage = (userId: string, defaultMessage: string) => {
+    return messages[userId]?.at(-1)?.content ?? defaultMessage
+  }
 
   // Set contacts when users are fetched
   useEffect(() => {
@@ -59,7 +63,7 @@ export const MessagesBoxList = () => {
               </div>
             </div>
             <p className="text-muted-foreground line-clamp-2 text-xs">
-              {u.lastMessage}
+              {getLatestMessage(u.id, u.lastMessage)}
             </p>
           </div>
         </button>

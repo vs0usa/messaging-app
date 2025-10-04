@@ -25,17 +25,19 @@ export const ChatBoxInput = ({ id }: Props) => {
   const { typingRecipients } = useMessagesStore()
   const { sendTypingStart, sendMessage } = useChat()
   const isTyping = typingRecipients.includes(id)
-  const debounced = useDebounceCallback(sendTypingStart, 1000, {
-    maxWait: 2000,
-  })
+
+  const debounced = useDebounceCallback(
+    () => {
+      if (form.getValues("content").length < 1) return
+      sendTypingStart(id)
+    },
+    1000,
+    { maxWait: 1000 },
+  )
   const form = useForm<z.infer<typeof schema>>({
     resolver: zodResolver(schema),
     defaultValues: { content: "" },
   })
-
-  const handleChange = () => {
-    debounced(id)
-  }
 
   const handleSubmit = (values: z.infer<typeof schema>) => {
     sendMessage(id, values.content)
@@ -62,7 +64,7 @@ export const ChatBoxInput = ({ id }: Props) => {
                     placeholder="Type a message"
                     {...field}
                     onChange={(e) => {
-                      handleChange()
+                      debounced()
                       field.onChange(e)
                     }}
                   />

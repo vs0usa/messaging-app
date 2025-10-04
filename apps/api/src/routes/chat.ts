@@ -166,6 +166,7 @@ export const app = new Hono().get("/", authMiddleware, async (c) => {
         ws.send(formatWsMessage("message:new", { message }))
         recipientWs.forEach((_ws) => {
           _ws.send(formatWsMessage("message:new", { message }))
+          _ws.send(formatWsMessage("typing:stop", { recipientId: user.id }))
         })
 
         break
