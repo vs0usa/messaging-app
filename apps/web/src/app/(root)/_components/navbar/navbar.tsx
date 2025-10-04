@@ -2,6 +2,7 @@
 
 import Image from "next/image"
 import Link from "next/link"
+import { NavbarLinks } from "@/app/(root)/_components/navbar/navbar-links"
 import { useUser } from "@/stores/auth-store"
 import { NavbarAuthedContent } from "./navbar-authed-content"
 import { NavbarUnauthedContent } from "./navbar-unauthed-content"
@@ -19,6 +20,7 @@ export const Navbar = () => {
           height={24}
         />
       </Link>
+      <NavbarLinks />
       {user && <NavbarAuthedContent />}
       {!user && <NavbarUnauthedContent />}
     </nav>
