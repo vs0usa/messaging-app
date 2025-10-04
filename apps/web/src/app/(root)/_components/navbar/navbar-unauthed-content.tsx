@@ -14,7 +14,7 @@ export const NavbarUnauthedContent = () => {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <button className="outline-none" type="button">
+        <button className="outline-none" type="button" suppressHydrationWarning>
           <Avatar
             className="max-size-9 hover:opacity-80"
             width={40}

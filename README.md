@@ -72,6 +72,8 @@ All environment variables are stored in the `.env` file in the root directory. T
 #### Root Level
 
 - `pnpm dev` - Start all development servers
+- `pnpm knip` - Run knip
+- `pnpm test:run` - Run unit tests
 - `pnpm build` - Build all packages and apps
 - `pnpm lint` - Lint all packages and apps
 - `pnpm lint:fix` - Fix all linting errors

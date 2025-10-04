@@ -6,7 +6,12 @@ E2E tests for the web application.
 
 This package provides E2E tests for the web application.
 
-## Useful Commands
+## Running the tests
 
-- `pnpm dev:test` - Run E2E tests in development mode
-- `pnpm e2e:test` - Run E2E tests
+You'll need to have the app running for the tests to work.
+
+```bash
+pnpm -F @repo/web-tests dev:test
+```
+
+This will launch the Playwright test runner. You'll then be able to run the tests in the browser.

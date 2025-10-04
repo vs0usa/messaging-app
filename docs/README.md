@@ -162,3 +162,16 @@ See more in [packages/ui/README.md](../packages/ui/README.md)
 - ESLint, Prettier, TypeScript configurations
 - GitHub Actions workflows
 - Shared development standards
+
+#### `packages/web-tests` - Web Tests
+
+- E2E tests for the web application
+- Playwright integration
+- Jest integration
+- React Testing Library integration
+- TypeScript integration
+- Jest integration
+- React Testing Library integration
+- TypeScript integration
+
+See more in [packages/web-tests/README.md](../packages/web-tests/README.md)

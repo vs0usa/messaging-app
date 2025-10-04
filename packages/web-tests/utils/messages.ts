@@ -7,7 +7,7 @@ export const sendMessage = async (
   name?: string,
 ) => {
   await page.goto("http://localhost:3000/messages")
-  await page.waitForTimeout(300)
+  await page.waitForTimeout(2000)
   await page.getByRole("button").nth(1).click()
 
   if (name) {

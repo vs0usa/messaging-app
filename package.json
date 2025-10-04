@@ -11,7 +11,6 @@
     "dev:test": "turbo run dev:test",
     "knip": "knip",
     "test:run": "turbo run test:run",
-    "e2e:test": "turbo run e2e:test",
     "format": "turbo run format --continue -- --cache --cache-location .cache/.prettiercache",
     "format:fix": "turbo run format --continue -- --write --cache --cache-location .cache/.prettiercache",
     "lint": "turbo run lint --continue -- --cache --cache-location .cache/.eslintcache",

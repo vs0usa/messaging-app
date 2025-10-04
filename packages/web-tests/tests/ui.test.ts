@@ -9,7 +9,7 @@ test("should redirect to home page when clicking on the logo", async ({
   page,
 }) => {
   await page.goto("http://localhost:3000/#")
-  await page.getByRole("navigation").getByRole("link").click()
+  await page.getByRole("navigation").getByRole("link").nth(0).click()
   expect(page.url()).toBe("http://localhost:3000/")
 })
 
