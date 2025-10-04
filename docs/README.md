@@ -110,6 +110,8 @@ messaging-app/
 - Database integration
 - File upload handling
 
+See more in [apps/api/README.md](../apps/api/README.md)
+
 #### `apps/web` - Frontend Web Application
 
 - Next.js application with App Router
@@ -117,6 +119,8 @@ messaging-app/
 - User authentication flows
 - Responsive design
 - Theme switching
+
+See more in [apps/web/README.md](../apps/web/README.md)
 
 ### Packages
 
@@ -127,11 +131,15 @@ messaging-app/
 - Session management
 - Database migrations
 
+See more in [packages/auth/README.md](../packages/auth/README.md)
+
 #### `packages/config` - Configuration
 
 - Environment variable validation
 - Shared configuration objects
 - Type-safe settings
+
+See more in [packages/config/README.md](../packages/config/README.md)
 
 #### `packages/db` - Database
 
@@ -140,11 +148,15 @@ messaging-app/
 - Migration utilities
 - Schema definitions
 
+See more in [packages/db/README.md](../packages/db/README.md)
+
 #### `packages/ui` - UI Components
 
 - Reusable React components
 - Tailwind CSS styling
 - Design system
+
+See more in [packages/ui/README.md](../packages/ui/README.md)
 
 #### `packages/*-config` - Development Tools
 
