@@ -7,7 +7,8 @@ type State = {
   contacts: Pick<User, "id" | "name" | "image">[]
   openChats: string[] // User IDs
   contactsExpanded: boolean
-  recipientId: string | null
+  recipientId: string | null // floating box recipient id
+  selectedContactId: string | null // messages page selected contact id
   messages: Record<string, ChatMessage[]>
   typingRecipients: string[]
 
@@ -16,6 +17,7 @@ type State = {
   toggleContacts: () => void
   openChat: (userId: string) => void
   closeChat: (userId: string) => void
+  setSelectedContactId: (userId: string | null) => void
   setMessages: (recipientId: string, messages: ChatMessage[]) => void
   addMessage: (recipientId: string, message: ChatMessage) => void
   delMessage: (id: string) => void
@@ -29,6 +31,7 @@ export const useMessagesStore = create<State>(
       openChats: [],
       contactsExpanded: false,
       recipientId: null,
+      selectedContactId: null,
       messages: {},
       typingRecipients: [],
       setContacts: (contacts: State["contacts"]) => set(() => ({ contacts })),
@@ -44,6 +47,8 @@ export const useMessagesStore = create<State>(
         set((state) => ({
           openChats: state.openChats.filter((id) => id !== userId),
         })),
+      setSelectedContactId: (userId: string | null) =>
+        set(() => ({ selectedContactId: userId })),
       setMessages: (recipientId: string, messages: ChatMessage[]) =>
         set((state) => ({
           messages: { ...state.messages, [recipientId]: messages },

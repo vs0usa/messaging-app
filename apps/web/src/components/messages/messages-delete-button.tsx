@@ -16,7 +16,7 @@ type Props = {
   id: string
 }
 
-export const ChatMessageDelete = ({ id }: Props) => {
+export const MessageDeleteButton = ({ id }: Props) => {
   const { deleteMessage } = useChat()
 
   const handleDelete = () => {

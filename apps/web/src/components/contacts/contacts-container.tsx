@@ -10,7 +10,7 @@ export const ContactsContainer = () => {
   if (!user) return null
 
   return (
-    <div className="fixed bottom-0 z-10 hidden w-screen flex-row-reverse gap-4 px-4 md:flex">
+    <div className="fixed bottom-0 right-0 hidden flex-row-reverse gap-4 px-4 md:flex">
       <ContactsBox />
       <ChatBoxesContainer />
     </div>

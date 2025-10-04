@@ -18,13 +18,13 @@ const schema = z.object({
 })
 
 type Props = {
-  id: string
+  recipientId: string
 }
 
-export const ChatBoxInput = ({ id }: Props) => {
+export const MessagesInput = ({ recipientId }: Props) => {
   const { typingRecipients } = useMessagesStore()
   const { sendTypingStart, sendMessage } = useChat()
-  const isTyping = typingRecipients.includes(id)
+  const isTyping = typingRecipients.includes(recipientId)
   const form = useForm<z.infer<typeof schema>>({
     resolver: zodResolver(schema),
     defaultValues: { content: "" },
@@ -33,19 +33,19 @@ export const ChatBoxInput = ({ id }: Props) => {
   const debounced = useDebounceCallback(
     () => {
       if (form.getValues("content").length < 1) return
-      sendTypingStart(id)
+      sendTypingStart(recipientId)
     },
     1000,
     { maxWait: 1000 },
   )
 
   const handleSubmit = (values: z.infer<typeof schema>) => {
-    sendMessage(id, values.content)
+    sendMessage(recipientId, values.content)
     form.reset()
   }
 
   return (
-    <div className="flex flex-col gap-1 p-4">
+    <div className="z-20 flex flex-col gap-1 p-4">
       <p
         className="text-muted-foreground invisible text-sm data-[typing=true]:visible"
         data-typing={isTyping}

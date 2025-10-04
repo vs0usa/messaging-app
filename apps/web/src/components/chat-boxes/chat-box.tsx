@@ -1,8 +1,8 @@
 import { motion } from "framer-motion"
 import { XIcon } from "lucide-react"
 import { Avatar } from "@repo/ui/components/avatar"
-import { ChatBoxInput } from "@/components/chat-boxes/chat-box-input"
-import { ChatBoxMessages } from "@/components/chat-boxes/chat-box-messages"
+import { MessagesInput } from "@/components/messages/messages-input"
+import { MessagesRecipient } from "@/components/messages/messages-recipient"
 import { useFloatingBoxes } from "@/hooks/use-floating-boxes"
 import { useMessagesStore } from "@/stores/messages-store"
 
@@ -58,8 +58,8 @@ export const ChatBox = ({ userId, index }: Props) => {
         </div>
       </div>
       <div className="bg-card flex h-full flex-col border-x border-t">
-        <ChatBoxMessages id={userId} />
-        <ChatBoxInput id={userId} />
+        <MessagesRecipient className="h-[calc(100%-140px)]" recipient={user} />
+        <MessagesInput recipientId={user.id} />
       </div>
     </motion.div>
   )

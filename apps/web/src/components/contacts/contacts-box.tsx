@@ -3,13 +3,22 @@
 import { motion } from "framer-motion"
 import { ChevronUpIcon } from "lucide-react"
 import { Avatar } from "@repo/ui/components/avatar"
-import { ContactsBoxList } from "@/components/contacts/contacts-box-list"
+import { ContactsList } from "@/components/contacts/contacts-list"
+import { useChat } from "@/hooks/use-chat"
 import { useUser } from "@/stores/auth-store"
 import { useMessagesStore } from "@/stores/messages-store"
 
 export const ContactsBox = () => {
   const user = useUser()
-  const { contactsExpanded, toggleContacts } = useMessagesStore()
+  const { askMessages } = useChat()
+  const { contactsExpanded, toggleContacts, openChat, setRecipientId } =
+    useMessagesStore()
+
+  const handleClick = (userId: string) => {
+    openChat(userId)
+    setRecipientId(userId)
+    askMessages(userId)
+  }
 
   if (!user) return null
 
@@ -47,7 +56,9 @@ export const ContactsBox = () => {
           </button>
         </div>
       </div>
-      <ContactsBoxList />
+      <div className="bg-card flex h-full flex-col overflow-y-auto border-x border-t">
+        <ContactsList onClick={handleClick} />
+      </div>
     </motion.div>
   )
 }

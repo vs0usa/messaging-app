@@ -162,6 +162,8 @@ export const app = new Hono().get("/", authMiddleware, async (c) => {
         const message = { ...rawMessage, attachments: [] }
         const recipientWs = sockets.get(recipientId)
 
+        send("message:new", { message })
+
         if (!recipientWs) {
           console.error(
             "⚠️ Recipient WebSocket not found. Can't send message new message to",
@@ -170,7 +172,6 @@ export const app = new Hono().get("/", authMiddleware, async (c) => {
           return
         }
 
-        send("message:new", { message })
         recipientWs.forEach((_ws) => {
           send("message:new", { message }, _ws)
           send("typing:stop", { recipientId: user.id }, _ws)
@@ -204,6 +205,10 @@ export const app = new Hono().get("/", authMiddleware, async (c) => {
 
         const recipientWs = sockets.get(message.recipientId)
 
+        send("message:delete", { id })
+
+        await c.var.db.deleteFrom("messages").where("id", "=", id).execute()
+
         if (!recipientWs) {
           console.error(
             "⚠️ Recipient WebSocket not found. Can't send message delete message to",
@@ -212,9 +217,6 @@ export const app = new Hono().get("/", authMiddleware, async (c) => {
           return
         }
 
-        await c.var.db.deleteFrom("messages").where("id", "=", id).execute()
-
-        send("message:delete", { id })
         recipientWs.forEach((_ws) => {
           send("message:delete", { id }, _ws)
         })
