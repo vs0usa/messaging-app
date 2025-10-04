@@ -1,15 +1,42 @@
 # `@repo/ui`
 
-This is the base UI package that contains all primitive components and styles for the application. It is built on top of [shadcn/ui](https://ui.shadcn.com/), providing a collection of accessible and customizable React components.
+Shared UI component library built with Radix UI primitives and Tailwind CSS.
 
-## Adding New Components
+## Description
 
-To add new components from the shadcn/ui collection, you can use the following command:
+This package provides:
 
-```bash
-pnpm -F ui add:component
+- Reusable React components
+- Tailwind CSS styling
+- Type-safe component props
+- Accessibility-first design
+- Dark/light theme support
+
+The package serves as the design system for the entire application, ensuring consistent UI components and styling across all packages and applications.
+
+## Usage
+
+```tsx
+import { Avatar } from "@repo/ui/components/avatar"
+import { Button } from "@repo/ui/components/button"
+
+// Use components in your app
+function MyComponent() {
+  return (
+    <div>
+      <Avatar src="/avatar.jpg" alt="User" />
+      <Button variant="primary">Click me</Button>
+    </div>
+  )
+}
 ```
 
-## Adding New Styles
+### Importing styles
 
-To add new styles, you can add them to the `globals.css` file in the `src/styles` directory.
+```ts
+import "@repo/ui/globals.css"
+```
+
+## Useful Commands
+
+- `pnpm add:component` - Add new shadcn/ui components to the library

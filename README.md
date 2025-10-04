@@ -1,21 +1,5 @@
 # messaging-app
 
-A messaging app built with Next.js, Tailwind CSS, and shadcn/ui. This was built as a technical test for a job application.
+A modern, real-time messaging application built with Next.js, Hono, and PostgreSQL. Features include real-time chat, contact management, file attachments, and a responsive design with dark/light theme support.
 
-## Getting Started
-
-```bash
-pnpm install
-```
-
-## Running the Development Server
-
-```bash
-pnpm dev
-```
-
-## Running the Production Server
-
-```bash
-pnpm start
-```
+Visit [docs/](./docs/) for comprehensive documentation.

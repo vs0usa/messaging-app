@@ -1,0 +1,225 @@
+# Messaging App Documentation
+
+A comprehensive guide to the messaging application architecture, features, and development workflow.
+
+## Table of Contents
+
+- [Features](#features)
+- [Architecture](#architecture)
+- [Tech Stack](#tech-stack)
+- [Project Structure](#project-structure)
+- [Getting Started](#getting-started)
+- [Development Workflow](#development-workflow)
+
+## Features
+
+### Core Messaging
+
+- **Real-time messaging** - Instant message delivery via WebSocket connections
+- **Message history** - Persistent message storage and retrieval
+- **File attachments** - Support for file uploads and sharing
+- **Message deletion** - Delete your own messages with confirmation
+
+### User Experience
+
+- **Responsive design** - Works seamlessly on desktop and mobile devices
+- **Dark/Light themes** - Toggle between dark and light mode
+- **Auto-scroll** - Messages automatically scroll to bottom
+- **Typing indicators** - See when contacts are typing
+- **Message timestamps** - Formatted date and time display
+
+### Authentication & Security
+
+- **User authentication** - Secure login and registration
+- **Session management** - Persistent user sessions
+- **Password security** - Secure password hashing
+- **Route protection** - Protected routes and API endpoints
+
+## Architecture
+
+### Monorepo Structure
+
+The project uses a monorepo architecture with the following structure:
+
+```no-highlight
+messaging-app/
+├── apps/                  # Applications
+│   ├── api/                 # Backend API server
+│   └── web/                 # Frontend web application
+├── packages/              # Shared packages
+│   ├── auth/                # Authentication package
+│   ├── config/              # Configuration package
+│   ├── db/                  # Database package
+│   ├── eslint-config/       # ESLint configuration
+│   ├── github-config/       # GitHub Actions config
+│   ├── prettier-config/     # Prettier configuration
+│   ├── typescript-config/   # TypeScript configuration
+│   └── ui/                  # UI component library
+└── docs/                  # Documentation
+```
+
+### Data Flow
+
+1. **User Authentication**: Users authenticate through the web app, which communicates with the API server
+2. **Real-time Messaging**: WebSocket connections handle real-time message delivery
+3. **Data Persistence**: Messages and user data are stored in PostgreSQL
+4. **State Management**: Frontend state is managed with Zustand stores
+
+## Tech Stack
+
+### Frontend
+
+- **Framework**: Next.js 15 with App Router
+- **Language**: TypeScript
+- **Styling**: Tailwind CSS 4
+- **UI Components**: Radix UI primitives
+- **State Management**: Zustand with tab synchronization
+- **Forms**: React Hook Form with Zod validation
+- **WebSocket**: Native WebSocket API
+- **Icons**: Lucide React
+- **Animations**: Framer Motion
+
+### Backend
+
+- **Framework**: Hono
+- **Language**: TypeScript
+- **Database**: PostgreSQL with Kysely ORM
+- **Authentication**: Better Auth
+- **WebSocket**: Hono WebSocket integration
+- **Validation**: Zod schemas
+- **Environment**: Node.js 22+
+
+### Development Tools
+
+- **Package Manager**: pnpm
+- **Monorepo**: Turbo
+- **Linting**: ESLint with custom configs
+- **Formatting**: Prettier with custom configs
+- **Type Checking**: TypeScript
+- **Code Quality**: Knip for unused code detection
+
+## Project Structure
+
+### Apps
+
+#### `apps/api` - Backend API Server
+
+- RESTful API endpoints
+- WebSocket server for real-time messaging
+- Authentication middleware
+- Database integration
+- File upload handling
+
+#### `apps/web` - Frontend Web Application
+
+- Next.js application with App Router
+- Real-time messaging interface
+- User authentication flows
+- Responsive design
+- Theme switching
+
+### Packages
+
+#### `packages/auth` - Authentication
+
+- Better Auth integration
+- Client and server configurations
+- Session management
+- Database migrations
+
+#### `packages/config` - Configuration
+
+- Environment variable validation
+- Shared configuration objects
+- Type-safe settings
+
+#### `packages/db` - Database
+
+- Kysely integration
+- Type-safe database queries and mutations
+- Migration utilities
+- Schema definitions
+
+#### `packages/ui` - UI Components
+
+- Reusable React components
+- Tailwind CSS styling
+- Design system
+
+#### `packages/*-config` - Development Tools
+
+- ESLint, Prettier, TypeScript configurations
+- GitHub Actions workflows
+- Shared development standards
+
+## Getting Started
+
+### Prerequisites
+
+- **Node.js**: Version 22 or higher
+- **pnpm**: Version 9.0.0 or higher
+- **PostgreSQL**: Version 17
+
+### Installation
+
+1. **Clone the repository**
+
+   ```bash
+   git clone https://github.com/vs0usa/messaging-app
+   cd messaging-app
+   ```
+
+2. **Install dependencies**
+
+   ```bash
+   pnpm install
+   ```
+
+3. **Set up environment variables**
+
+   ```bash
+   cp .env.example .env
+   # Edit .env with your configuration
+   ```
+
+4. **Set up the database**
+
+   ```bash
+   # Start PostgreSQL (if using Docker)
+   docker-compose up -d
+   
+   # Run migrations
+   pnpm -F @repo/db run kysely migrate:latest
+
+   # Run seeds
+   pnpm -F @repo/db run kysely seed run
+   ```
+
+5. **Start development servers**
+
+   ```bash
+   pnpm dev
+   ```
+
+### Environment Variables
+
+All environment variables are stored in the `.env` file in the root directory. There is also a `.env.example` file that you can use as a template.
+
+## Development Workflow
+
+### Available Scripts
+
+#### Root Level
+
+- `pnpm dev` - Start all development servers
+- `pnpm build` - Build all packages and apps
+- `pnpm lint` - Lint all packages and apps
+- `pnpm lint:fix` - Fix all linting errors
+- `pnpm lint:ws` - Lint all workspaces using sherif
+- `pnpm format` - Format all code
+- `pnpm format:fix` - Fix all code formatting
+- `pnpm check-types` - Type check all packages and apps
+
+#### Individual Packages
+
+Each package has its own scripts for development, building, and testing. You can refer to the package README files for more information.

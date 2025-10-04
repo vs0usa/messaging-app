@@ -1,28 +1,42 @@
-# @repo/db
+# `@repo/db`
 
-Database package for the messaging app using Kysely as the query builder.
+Database package providing Kysely ORM integration with PostgreSQL for type-safe database operations.
+
+## Description
+
+This package provides:
+
+- Type-safe database queries using Kysely
+- Database schema types
+- Migrations
+
+The package ensures type safety across all database operations, providing compile-time checks for queries and preventing common database-related errors.
 
 ## Usage
 
-```typescript
-import { checkDatabaseConnection, db } from "@repo/db"
+```ts
+import { db } from "@repo/db"
 
-// Check database connection
-const isConnected = await checkDatabaseConnection()
+// Type-safe queries
+const users = await db
+  .selectFrom("users")
+  .selectAll()
+  .where("email", "=", "user@example.com")
+  .execute()
 
-// Use the database instance
-const users = await db.selectFrom("users").selectAll().execute()
+// Insert with type safety
+await db
+  .insertInto("messages")
+  .values({
+    content: "Hello world",
+    senderId: "user-123",
+    recipientId: "user-456",
+  })
+  .execute()
 ```
 
-## Development
+## Useful Commands
 
-```bash
-# Install dependencies
-pnpm install
-
-# Type check
-pnpm type-check
-
-# Lint
-pnpm lint
-```
+- `pnpm kysely` - Run Kysely CLI commands for database management
+- `pnpm kysely migrate:latest` - Apply all migrations
+- `pnpm kysely seed` - Seed the database with data
