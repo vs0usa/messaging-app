@@ -13,8 +13,14 @@ import {
 } from "@/utils/ws-schemas"
 
 export const useChat = () => {
-  const { setMessages, setTypingRecipient, addMessage, delMessage } =
-    useMessagesStore()
+  const {
+    contacts,
+    addContacts,
+    setMessages,
+    setTypingRecipient,
+    addMessage,
+    delMessage,
+  } = useMessagesStore()
   const user = useUser()
 
   const send = useCallback(
@@ -144,13 +150,28 @@ export const useChat = () => {
 
       console.log("✅ Message new message received from WebSocket server")
 
-      const { message } = parsed.data.payload
-      addMessage(
-        message.senderId === user.id ? message.recipientId : message.senderId,
-        message,
-      )
+      const { message, recipient, sender } = parsed.data.payload
+
+      if (sender.id === user.id) {
+        addMessage(recipient.id, message)
+        return
+      }
+
+      const contact = contacts.find((c) => c.id === sender.id)
+
+      if (!contact) {
+        addContacts([
+          {
+            ...sender,
+            lastMessage: message.content,
+            lastMessageAt: message.createdAt.toISOString(),
+          },
+        ])
+      }
+
+      addMessage(sender.id, message)
     },
-    [addMessage, user],
+    [addContacts, addMessage, contacts, user],
   )
   const handleMessageDelete = useCallback(
     (data: unknown) => {

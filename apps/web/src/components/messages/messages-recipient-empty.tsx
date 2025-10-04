@@ -2,7 +2,7 @@ import Image from "next/image"
 
 export const MessagesRecipientEmpty = () => {
   return (
-    <div className="flex size-full flex-col items-center justify-center p-16 text-center">
+    <div className="flex size-full h-[calc(100%-92px)] flex-col items-center justify-center px-16 text-center">
       <Image
         src="/illustrations/sending-messages.svg"
         className="select-none"

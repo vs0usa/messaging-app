@@ -1,13 +1,10 @@
-import type { User } from "@repo/auth/server"
+import type { Contact } from "@repo/api"
 import { Avatar } from "@repo/ui/components/avatar"
 import { useMessagesStore } from "@/stores/messages-store"
 import { formatMessageDate } from "@/utils/date-format"
 
 type Props = {
-  contact: Pick<User, "id" | "name" | "image"> & {
-    lastMessage: string
-    lastMessageAt: string
-  }
+  contact: Contact & { lastMessage: string; lastMessageAt: string }
   onClick: () => void
 }
 
@@ -25,7 +22,7 @@ export const ContactsCard = ({ contact: c, onClick }: Props) => {
       onClick={onClick}
     >
       <Avatar
-        className="max-size-10"
+        className="max-size-10 min-w-10"
         src={c.image}
         height={40}
         width={40}

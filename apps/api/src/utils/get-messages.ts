@@ -12,15 +12,18 @@ export const getMessages = async (userId: string, recipientId: string) => {
     )
     .orderBy("createdAt", "asc")
     .execute()
-  const attachments = await db
-    .selectFrom("attachments")
-    .selectAll()
-    .where(
-      "messageId",
-      "in",
-      rawMessages.map((m) => m.id),
-    )
-    .execute()
+  const attachments =
+    rawMessages.length > 0
+      ? await db
+          .selectFrom("attachments")
+          .selectAll()
+          .where(
+            "messageId",
+            "in",
+            rawMessages.map((m) => m.id),
+          )
+          .execute()
+      : []
   const messages = rawMessages.map((m) => ({
     ...m,
     attachments: attachments.filter((a) => a.messageId === m.id),

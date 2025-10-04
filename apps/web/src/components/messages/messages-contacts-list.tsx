@@ -14,7 +14,7 @@ export const MessagesContactsList = () => {
   }
 
   return (
-    <div className="md:min-w-72 md:max-w-72">
+    <div className="overflow-y-auto md:min-w-72 md:max-w-72">
       <ContactsList onClick={handleClick} />
     </div>
   )

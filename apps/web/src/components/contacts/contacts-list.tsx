@@ -16,29 +16,27 @@ export const ContactsList = ({ onClick }: Props) => {
     queryKey: ["get-contacts"],
     queryFn: call(apiClient.contacts.$get),
   })
-  const { setContacts } = useMessagesStore()
+  const { contacts, setContacts } = useMessagesStore()
   const sortedUsers = useMemo(
     () =>
-      users?.data.sort(
+      contacts.sort(
         (a, b) =>
           new Date(b.lastMessageAt).getTime() -
           new Date(a.lastMessageAt).getTime(),
       ),
-    [users],
+    [contacts],
   )
 
   // Set contacts once they are fetched
   useEffect(() => {
     if (!users) return
 
-    setContacts(
-      users.data.map((u) => ({ id: u.id, name: u.name, image: u.image })),
-    )
+    setContacts(users.data)
   }, [setContacts, users])
 
   if (isPending) return <ContactsListSkeleton />
 
-  return sortedUsers?.map((u) => (
+  return sortedUsers.map((u) => (
     <ContactsCard key={u.id} contact={u} onClick={() => onClick(u.id)} />
   ))
 }

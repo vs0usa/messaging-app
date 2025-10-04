@@ -42,6 +42,7 @@ injectWebSocket(server)
 
 export type AppType = typeof routes
 export type {
+  Contact,
   ChatMessage,
   ServerWsMessage,
   ClientWsMessage,

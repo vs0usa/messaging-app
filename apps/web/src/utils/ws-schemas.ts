@@ -55,7 +55,19 @@ export const typingStopSchema = z.object({
 
 export const messageNewSchema = z.object({
   type: z.literal("message:new"),
-  payload: z.object({ message: messageSchema }),
+  payload: z.object({
+    message: messageSchema,
+    sender: z.object({
+      id: z.uuid(),
+      name: z.string(),
+      image: z.string().nullable(),
+    }),
+    recipient: z.object({
+      id: z.uuid(),
+      name: z.string(),
+      image: z.string().nullable(),
+    }),
+  }),
 })
 
 export const messageDeleteSchema = z.object({

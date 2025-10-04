@@ -1,5 +1,5 @@
 import { useEffect, useRef } from "react"
-import type { User } from "@repo/auth/server"
+import type { Contact } from "@repo/api"
 import { cn } from "@repo/ui/lib/utils"
 import { MessageBubble } from "@/components/messages/message-bubble"
 import { MessagesRecipientEmpty } from "@/components/messages/messages-recipient-empty"
@@ -8,7 +8,7 @@ import { useUser } from "@/stores/auth-store"
 import { useMessagesStore } from "@/stores/messages-store"
 
 type Props = {
-  recipient: Pick<User, "id" | "name" | "image">
+  recipient: Contact
   className?: string
 }
 

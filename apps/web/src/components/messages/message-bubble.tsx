@@ -6,7 +6,7 @@ import { useUser } from "@/stores/auth-store"
 import { formatMessageDate } from "@/utils/date-format"
 
 type Props = {
-  recipient: Pick<User, "id" | "name" | "image">
+  recipient: Contact
   message: ChatMessage
 }
 

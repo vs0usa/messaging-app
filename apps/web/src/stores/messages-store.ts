@@ -1,10 +1,9 @@
 import { create } from "zustand"
 import { syncTabs } from "zustand-sync-tabs"
-import type { ChatMessage } from "@repo/api"
-import type { User } from "@repo/auth/server"
+import type { ChatMessage, Contact } from "@repo/api"
 
 type State = {
-  contacts: Pick<User, "id" | "name" | "image">[]
+  contacts: (Contact & { lastMessage: string; lastMessageAt: string })[]
   openChats: string[] // User IDs
   contactsExpanded: boolean
   recipientId: string | null // floating box recipient id
@@ -12,7 +11,12 @@ type State = {
   messages: Record<string, ChatMessage[]>
   typingRecipients: string[]
 
-  setContacts: (contacts: Pick<User, "id" | "name" | "image">[]) => void
+  setContacts: (
+    contacts: (Contact & { lastMessage: string; lastMessageAt: string })[],
+  ) => void
+  addContacts: (
+    contacts: (Contact & { lastMessage: string; lastMessageAt: string })[],
+  ) => void
   setRecipientId: (userId: string | null) => void
   toggleContacts: () => void
   openChat: (userId: string) => void
@@ -35,6 +39,10 @@ export const useMessagesStore = create<State>(
       messages: {},
       typingRecipients: [],
       setContacts: (contacts: State["contacts"]) => set(() => ({ contacts })),
+      addContacts: (contacts: State["contacts"]) =>
+        set((state) => ({
+          contacts: [...state.contacts, ...contacts],
+        })),
       setRecipientId: (userId: string | null) =>
         set(() => ({ recipientId: userId })),
       toggleContacts: () =>

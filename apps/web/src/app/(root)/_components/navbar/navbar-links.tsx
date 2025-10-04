@@ -25,7 +25,7 @@ export const NavbarLinks = () => {
   const user = useUser()
 
   return (
-    <div className="flex gap-8">
+    <div className="flex gap-4 md:gap-8">
       {items.map((item) => {
         if (item.authed && !user) return null
 

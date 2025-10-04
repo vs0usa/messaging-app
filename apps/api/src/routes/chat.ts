@@ -141,6 +141,20 @@ export const app = new Hono().get("/", authMiddleware, async (c) => {
         }
 
         const { recipientId, content, fileUrl } = parsed.data.payload
+        const recipient = await c.var.db
+          .selectFrom("users")
+          .where("id", "=", recipientId)
+          .selectAll()
+          .executeTakeFirst()
+
+        if (!recipient) {
+          console.error(
+            "⚠️ Recipient not found. Can't send message new message to",
+            recipientId,
+          )
+          return
+        }
+
         const rawMessage = await createMessage(
           user.id,
           recipientId,
@@ -160,9 +174,10 @@ export const app = new Hono().get("/", authMiddleware, async (c) => {
         }
 
         const message = { ...rawMessage, attachments: [] }
+        const sender = { id: user.id, name: user.name, image: user.image }
         const recipientWs = sockets.get(recipientId)
 
-        send("message:new", { message })
+        send("message:new", { message, recipient, sender })
 
         if (!recipientWs) {
           console.error(
@@ -173,7 +188,7 @@ export const app = new Hono().get("/", authMiddleware, async (c) => {
         }
 
         recipientWs.forEach((_ws) => {
-          send("message:new", { message }, _ws)
+          send("message:new", { message, recipient, sender }, _ws)
           send("typing:stop", { recipientId: user.id }, _ws)
         })
 
