@@ -10,7 +10,7 @@ Visit [docs/](./docs/) for comprehensive documentation.
 
 - **Node.js**: Version 22 or higher
 - **pnpm**: Version 9.0.0 or higher
-- **PostgreSQL**: Version 17
+- **Docker**: Any recent version
 
 ### Installation
 
