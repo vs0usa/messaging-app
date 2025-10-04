@@ -1,4 +1,5 @@
 import Link from "next/link"
+import { useRouter } from "next/navigation"
 import { MailsIcon, SettingsIcon } from "lucide-react"
 import { authClient } from "@repo/auth/client"
 import { Avatar } from "@repo/ui/components/avatar"
@@ -17,6 +18,7 @@ import { NavbarCommonContent } from "./navbar-common-content"
 export const NavbarAuthedContent = () => {
   const { user, signOut } = useAuth()
   const { handleError } = useHandleAuthError()
+  const router = useRouter()
 
   const handleSignOut = async () => {
     await authClient.signOut({
@@ -28,6 +30,8 @@ export const NavbarAuthedContent = () => {
         },
       },
     })
+
+    router.push("/")
   }
 
   if (!user) return null

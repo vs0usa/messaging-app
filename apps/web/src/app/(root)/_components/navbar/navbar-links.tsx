@@ -4,6 +4,7 @@ import Link from "next/link"
 import { usePathname } from "next/navigation"
 import { HouseIcon, MailsIcon } from "lucide-react"
 import { UnderlineButton } from "@repo/ui/components/underline-button"
+import { useUser } from "@/stores/auth-store"
 
 const items = [
   {
@@ -15,26 +16,32 @@ const items = [
     href: "/messages",
     icon: MailsIcon,
     label: "Messages",
+    authed: true,
   },
 ]
 
 export const NavbarLinks = () => {
   const pathname = usePathname()
+  const user = useUser()
 
   return (
     <div className="flex gap-8">
-      {items.map((item) => (
-        <UnderlineButton
-          key={item.href}
-          className="px-2 after:-bottom-[11px] after:h-0.5 data-[active=true]:after:scale-x-100"
-          data-active={pathname === item.href}
-          asChild
-        >
-          <Link href={item.href}>
-            <item.icon className="size-8" />
-          </Link>
-        </UnderlineButton>
-      ))}
+      {items.map((item) => {
+        if (item.authed && !user) return null
+
+        return (
+          <UnderlineButton
+            key={item.href}
+            className="px-2 after:-bottom-[13px] after:h-0.5 data-[active=true]:after:scale-x-100 md:after:-bottom-[11px]"
+            data-active={pathname === item.href}
+            asChild
+          >
+            <Link href={item.href}>
+              <item.icon className="size-7 md:size-8" />
+            </Link>
+          </UnderlineButton>
+        )
+      })}
     </div>
   )
 }
