@@ -11,6 +11,7 @@ export const signUp = async (
   await page.fill("#password", user.password)
   await page.click("button[type=submit]")
   await expect(page.getByText("Welcome to the app!")).toBeVisible()
+  await page.waitForTimeout(300)
   expect(page.url()).toBe("http://localhost:3000/")
 }
 
@@ -23,5 +24,6 @@ export const signIn = async (
   await page.fill("#password", user.password)
   await page.click("button[type=submit]")
   await expect(page.getByText("Welcome to the app!")).toBeVisible()
+  await page.waitForTimeout(300)
   expect(page.url()).toBe("http://localhost:3000/")
 }
