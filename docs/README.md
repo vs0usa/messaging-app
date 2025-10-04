@@ -97,6 +97,7 @@ messaging-app/
 - **Formatting**: Prettier with custom configs
 - **Type Checking**: TypeScript
 - **Code Quality**: Knip for unused code detection
+- **Testing**: Vitest for unit tests & Playwright for E2E tests
 
 ## Project Structure
 
@@ -211,6 +212,14 @@ See more in [packages/ui/README.md](../packages/ui/README.md)
 
    ```bash
    pnpm dev
+   ```
+
+6. **Download Playwright browsers** (only needed for E2E tests)
+
+   See more in [TESTING.md](./TESTING.md#setting-up-playwright)
+
+   ```bash
+   pnpm exec playwright install
    ```
 
 ### Environment Variables

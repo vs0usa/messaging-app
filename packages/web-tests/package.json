@@ -1,0 +1,27 @@
+{
+  "name": "@repo/web-tests",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev:test": "playwright test --ui",
+    "e2e:test": "start-server-and-test \"(cd ../../apps/web && pnpm start)\" http://localhost:3000 \"playwright test\"",
+    "format": "prettier --check . --ignore-path ../../.gitignore",
+    "lint": "eslint .",
+    "check-types": "tsc --noEmit"
+  },
+  "devDependencies": {
+    "@faker-js/faker": "^10.0.0",
+    "@playwright/test": "^1.55.1",
+    "@repo/eslint-config": "workspace:^",
+    "@repo/prettier-config": "workspace:^",
+    "@repo/typescript-config": "workspace:^",
+    "@repo/web": "workspace:^",
+    "eslint": "^9.36.0",
+    "prettier": "^3.6.2",
+    "start-server-and-test": "^2.1.2",
+    "typescript": "^5.9.2",
+    "typescript-eslint": "^8.42.0"
+  },
+  "prettier": "@repo/prettier-config"
+}
