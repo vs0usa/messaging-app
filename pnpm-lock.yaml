@@ -378,9 +378,6 @@ importers:
       '@ianvs/prettier-plugin-sort-imports':
         specifier: ^4.7.0
         version: 4.7.0(prettier@3.6.2)
-      '@repo/typescript-config':
-        specifier: workspace:^
-        version: link:../typescript-config
       '@types/node':
         specifier: ^22.15.3
         version: 22.18.8
@@ -390,9 +387,6 @@ importers:
       prettier-plugin-tailwindcss:
         specifier: ^0.6.14
         version: 0.6.14(@ianvs/prettier-plugin-sort-imports@4.7.0(prettier@3.6.2))(prettier@3.6.2)
-      typescript:
-        specifier: ^5.9.2
-        version: 5.9.2
 
   packages/typescript-config: {}
 
