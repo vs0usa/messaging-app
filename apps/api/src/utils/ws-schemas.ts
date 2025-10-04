@@ -22,11 +22,6 @@ export const typingStartSchema = z.object({
   payload: z.object({ recipientId: z.string() }),
 })
 
-export const typingStopSchema = z.object({
-  type: z.literal("typing:stop"),
-  payload: z.object({ recipientId: z.string() }),
-})
-
 export const messageNewSchema = z.object({
   type: z.literal("message:new"),
   payload: z.object({

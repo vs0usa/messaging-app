@@ -21,7 +21,8 @@
     "@repo/auth": "workspace:^",
     "@repo/config": "workspace:^",
     "@repo/db": "workspace:^",
-    "hono": "4.9.7"
+    "hono": "4.9.7",
+    "zod": "^4.1.11"
   },
   "devDependencies": {
     "@repo/eslint-config": "workspace:^",

@@ -41,6 +41,9 @@ importers:
       hono:
         specifier: 4.9.7
         version: 4.9.7
+      zod:
+        specifier: ^4.1.11
+        version: 4.1.11
     devDependencies:
       '@repo/eslint-config':
         specifier: workspace:^
