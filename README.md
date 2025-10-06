@@ -55,7 +55,7 @@ Visit [docs/](./docs/) for comprehensive documentation.
 
 6. **Download Playwright browsers** (only needed for E2E tests)
 
-   See more in [TESTING.md](./TESTING.md#setting-up-playwright)
+   See more in [TESTING.md](./docs/TESTING.md#setting-up-playwright)
 
    ```bash
    pnpm exec playwright install
@@ -63,7 +63,7 @@ Visit [docs/](./docs/) for comprehensive documentation.
 
 ### Environment Variables
 
-All environment variables are stored in the `.env` file in the root directory. There is also a `.env.example` file that you can use as a template.
+All environment variables should be stored in the `.env` file in the root directory. There is a `.env.example` file that you can use as a template.
 
 ## Development Workflow
 

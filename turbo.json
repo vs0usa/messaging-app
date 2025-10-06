@@ -23,6 +23,10 @@
       "dependsOn": ["^topo"],
       "outputs": ["coverage/**"]
     },
+    "test:coverage": {
+      "dependsOn": ["^topo"],
+      "outputs": ["coverage/**"]
+    },
     "format": {
       "outputs": [".cache/.prettiercache"],
       "outputLogs": "new-only"

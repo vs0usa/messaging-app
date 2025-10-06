@@ -1,28 +1,25 @@
 # Testing
 
+This project has a combination of unit tests and E2E tests.
+
 ## Unit Tests
 
 Unit tests are located near the code they test inside `apps/api` and `apps/web`.
+
+You can run them with `pnpm test:run`.
 
 ## E2E Tests
 
 E2E tests are exclusively located in the `packages/web-tests` directory. As the name suggests, they are used to test the web application.
 
-## Testing Commands
+Before running the E2E tests, you will need 3 things:
 
-- `pnpm test:run` - Run unit tests
-- `pnpm e2e:test` - Run E2E tests
-- `pnpm dev:test` - Run E2E tests in development mode
+- **Have the database running**. You can do this by running `docker-compose up -d`.
+- **Have the web application running**. You can do this by running `pnpm dev`.
+- **Have the Playwright browsers installed**. You can do this by running `pnpm exec playwright install`.
+
+You can run them with `pnpm dev:test`.
 
 ## Testing Coverage
 
-- `pnpm test:coverage` - Generate test coverage report
-- `pnpm e2e:test:coverage` - Generate E2E test coverage report
-
-## Setting up Playwright
-
-After installing the dependencies, you need to install the Playwright browsers.
-
-```bash
-pnpm exec playwright install
-```
+- `pnpm test:coverage` - Generate test unit coverage report
